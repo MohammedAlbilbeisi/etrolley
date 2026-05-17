@@ -1,0 +1,926 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="E-trolley is a premium Qatari platform that allows you to create your professional online store in less than a minute. Validated by the Qatari Ministry of Communications.">
+    <meta name="keywords" content="e-commerce, online store, Qatar, E-trolley, create store, shopping cart, digital business">
+    <meta name="author" content="E-trolley">
+    <meta name="robots" content="index, follow">
+    <link rel="canonical" href="https://www.e-trolley.com/">
+
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://www.e-trolley.com/">
+    <meta property="og:title" content="E-trolley | Create Your Professional Store in Minutes">
+    <meta property="og:description" content="Build your online store today with E-trolley. The fastest and most reliable e-commerce platform in Qatar.">
+    <meta property="og:image" content="https://www.e-trolley.com/assets/images/logo.svg">
+
+    <!-- Twitter -->
+    <meta property="twitter:card" content="summary_large_image">
+    <meta property="twitter:url" content="https://www.e-trolley.com/">
+    <meta property="twitter:title" content="E-trolley | Create Your Professional Store in Minutes">
+    <meta property="twitter:description" content="Build your online store today with E-trolley. The fastest and most reliable e-commerce platform in Qatar.">
+    <meta property="twitter:image" content="https://www.e-trolley.com/assets/images/logo.svg">
+
+    <title>E-trolley | Create Your Professional Online Store in Minutes</title>
+
+    <!-- Favicon -->
+    <link rel="icon" type="image/svg+xml" href="./assets/images/footer-logo.svg">
+
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <!-- Google Fonts (Noto Sans Arabic) -->
+    <link
+        href="https://fonts.googleapis.com/css2?family=Noto+Sans+Arabic:wght@100;200;300;400;500;600;700;800;900&display=swap"
+        rel="stylesheet">
+
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
+
+    <!-- AOS Animation -->
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    <link rel="stylesheet" href="./css/style.css">
+</head>
+</head>
+
+<body class="loading">
+    <!-- Top-left localized glow -->
+    <div
+        class="absolute top-[-50px] left-[-50px] w-[350px] h-[350px] bg-[#F5C99A]/40 blur-[80px] rounded-full pointer-events-none z-[1100]">
+    </div>
+
+    <!-- Loader Wrapper -->
+    <div id="loader-wrapper">
+        <div class="loader-container">
+            <div class="loader-ring loader-ring-outer"></div>
+            <div class="loader-ring loader-ring-inner"></div>
+            <div class="loader-logo-inner">
+                <img src="./assets/images/logo.svg" alt="E-Trolley">
+            </div>
+        </div>
+        <div class="loader-status-text">Your Store is Ready...</div>
+    </div>
+
+    <header>
+        <div class="header-content">
+            <div class="nav-logo-container">
+                <img src="./assets/images/logo.svg" alt="E-Trolley - Premium E-commerce Platform" class="nav-logo-img">
+            </div>
+            <nav class="nav-links">
+                <a href="#" class="nav-item active">Home</a>
+                <a href="#" class="nav-item">Services</a>
+                <a href="#" class="nav-item">Prices</a>
+                <a href="#" class="nav-item">About Us <i class="fas fa-chevron-down text-[10px]"></i></a>
+                <a href="#" class="nav-item">Contact Us</a>
+                <a href="#" class="nav-item lang-link">English <i class="fas fa-chevron-down text-[10px]"></i></a>
+            </nav>
+            <div class="header-actions">
+                <div class="phone-section">
+                    <div class="phone-icon-wrapper" style="background: #F5C99A30;">
+                        <img src="./assets/images/phone-icon.svg" alt="Contact Support Phone Icon" class="phone-icon-img">
+                    </div>
+                    <div class="phone-info">
+                        <span class="phone-label">Call us at:</span>
+                        <a href="tel:+97450988700" class="phone-number" style="text-decoration: none;">(+974)50988700</a>
+                    </div>
+                </div>
+                <button class="btn-create-store">Create a store</button>
+                <!-- Hamburger Menu Button -->
+                <button id="mobile-menu-btn" class="mobile-menu-btn" aria-label="Toggle Mobile Menu">
+                    <i class="fas fa-bars"></i>
+                </button>
+            </div>
+        </div>
+        <!-- Mobile Navigation Menu -->
+        <div id="mobile-nav" class="mobile-nav">
+            <div class="mobile-nav-header">
+                <img src="./assets/images/logo.svg" alt="Logo" class="h-8">
+                <button id="close-menu" class="close-menu"><i class="fas fa-times"></i></button>
+            </div>
+            <div class="mobile-nav-links">
+                <a href="#" class="mobile-nav-item active">Home</a>
+                <a href="#" class="mobile-nav-item">Services</a>
+                <a href="#" class="mobile-nav-item">Prices</a>
+                <a href="#" class="mobile-nav-item">About Us</a>
+                <a href="#" class="mobile-nav-item">Contact Us</a>
+                <a href="#" class="mobile-nav-item">English</a>
+            </div>
+            <div class="mobile-nav-footer">
+                <button class="btn-create-store w-full">Create a store</button>
+            </div>
+        </div>
+    </header>
+
+    <main>
+        <section class="hero">
+            <div class="hero-container-absolute">
+                <!-- QR Section -->
+                <div class="qr-section-absolute">
+                    <div class="qr-card-img">
+                        <img src="./assets/images/qr-code.svg" alt="E-trolley Official QR Code" class="w-full h-auto">
+
+                    </div>
+                    <div class="flex items-center gap-3 mt-[70px]">
+                        <div class="validation-icon-wrapper flex shrink-0 items-center justify-center">
+                            <img src="./assets/images/grommet-icons.svg" alt="Ministry of Communications Validation"
+                                class="w-full h-full object-contain" style="color: #316C6B;">
+                        </div>
+                        <p class="validation-text-p">
+                            etrolley is a platform that has been officially validated by the Qatari Ministry of
+                            Communications.
+                        </p>
+                    </div>
+                </div>
+
+            <!-- Main Wrapper (Text + Watermark) -->
+            <div class="hero-watermark-text"></div>
+            <div class="hero-main-wrapper">
+                <h1 class="hero-title reveal-title">Your store will be <br> ready in no more <br> than a minute.</h1>
+            </div>
+
+            <!-- Social Bar -->
+            <div class="social-bar-absolute">
+                <span
+                    class="transform -rotate--180 writing-mode-vertical-rl font-extrabold text-[12px] text-slate-900 uppercase tracking-widest mb-2">Follow</span>
+                <div class="flex flex-col gap-3">
+                    <a href="#" class="social-icon-link fb"><i class="fab fa-facebook-f"></i></a>
+                    <a href="#" class="social-icon-link tw"><i class="fab fa-x-twitter"></i></a>
+                    <a href="#" class="social-icon-link ln"><i class="fab fa-linkedin-in"></i></a>
+                    <a href="#" class="social-icon-link ig"><i class="fab fa-instagram"></i></a>
+                </div>
+            </div>
+
+            <!-- Laptop -->
+            <div class="laptop-visual-absolute translate-x-[-80px] translate-y-[-80px]">
+                <img src="./assets/images/laptop.svg" alt="Laptop" class="laptop-img-hero">
+            </div>
+
+            <!-- Build Button & Arrows -->
+            <div class="btn-hero-wrap">
+                <button class="btn-build-now">Build Your Store Now</button>
+                <div class="hero-arrows">
+                    <button class="arrow-btn"><i class="fas fa-arrow-left"></i></button>
+                    <button class="arrow-btn"><i class="fas fa-arrow-right"></i></button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="creative-steps overflow-hidden    bg-[#FAFAFA]/30">
+        <div class="max-w-[1440px] mx-auto px-[60px]   relative">
+
+            <!-- Header Section -->
+            <div class="mb-20 text-center md:text-left w-full flex flex-col items-center md:items-start">
+                <div class="flex flex-col md:flex-row items-center gap-3 mb-4 justify-center md:justify-start">
+                    <div class="flex items-center justify-center">
+                        <div class="w-12 h-[1px] bg-slate-400"></div>
+                        <div class="flex items-center -mx-1.5">
+                            <div class="w-3.5 h-3.5 rounded-full bg-[#F5C99A] border border-[#E5A158]"></div>
+                            <div class="w-3.5 h-3.5 rounded-full bg-white border border-slate-200 -ml-2"></div>
+                        </div>
+                        <div class="w-12 h-[1px] bg-slate-400"></div>
+                    </div>
+                    <span class="text-[14px] font-medium text-slate-500 tracking-wide text-center md:text-left">Build a store</span>
+                </div>
+                <h2 class="text-[22px] md:text-[32px] font-semibold text-[#1A1A1A] leading-tight reveal-title w-full text-center md:text-left">Our <br class="hidden md:block">Creative Steps
+                </h2>
+            </div>
+
+            <!-- Cards Grid Layout -->
+            <div class="relative min-h-[400px]">
+                <div class="grid grid-cols-1 md:grid-cols-4 gap-8 items-end">
+
+                    <!-- Step 01 -->
+                    <div
+                        class="bg-white p-10 rounded-[30px] shadow-xl shadow-slate-200/40 h-[350px] flex flex-col justify-between hover:-translate-y-2 transition-all duration-300 step-reveal">
+                        <div class="flex justify-between items-start">
+                            <div class="w-[35px] h-[35px]">
+                                <img src="./assets/images/creative-icon1.svg" alt="Icon 1"
+                                    class="w-full h-full object-contain">
+                            </div>
+                            <span class="text-6xl font-black step-number-stroke">01</span>
+                        </div>
+                        <p class="text-[#475569] font-medium text-[15px] md:text-[16px] leading-relaxed">Select the package that matches
+                            your needs</p>
+                    </div>
+
+                    <!-- Step 02 -->
+                    <div
+                        class="bg-white p-10 rounded-[30px] shadow-xl shadow-slate-200/40 h-[350px] flex flex-col justify-between hover:-translate-y-2 transition-all duration-300 step-reveal">
+                        <div class="flex justify-between items-start">
+                            <div class="w-[35px] h-[35px]">
+                                <img src="./assets/images/creative-icon2.svg" alt="Icon 2"
+                                    class="w-full h-full object-contain">
+                            </div>
+                            <span class="text-6xl font-black step-number-stroke">02</span>
+                        </div>
+                        <p class="text-[#475569] font-medium text-[15px] md:text-[16px] leading-relaxed">Pick a design that is in line
+                            with your brand.</p>
+                    </div>
+
+                    <!-- Step 03 (Elevated) -->
+                    <div
+                        class="bg-white p-10 rounded-[30px] shadow-xl shadow-slate-200/40 h-[350px] flex flex-col justify-between hover:-translate-y-2 transition-all duration-300 md:-translate-y-[200px] step-reveal">
+                        <div class="flex justify-between items-start">
+                            <div class="w-[35px] h-[35px]">
+                                <img src="./assets/images/creative-icon3.svg" alt="Icon 3"
+                                    class="w-full h-full object-contain">
+                            </div>
+                            <span class="text-6xl font-black step-number-stroke">03</span>
+                        </div>
+                        <p class="text-[#475569] font-medium text-[15px] md:text-[16px] leading-relaxed">Enter your store details and
+                            finalize the payment process.</p>
+                    </div>
+
+                    <!-- Step 04 -->
+                    <div
+                        class="bg-white p-10 rounded-[30px] shadow-xl shadow-slate-200/40 h-[350px] flex flex-col justify-between hover:-translate-y-2 transition-all duration-300 step-reveal">
+                        <div class="flex justify-between items-start">
+                            <div class="w-[35px] h-[35px]">
+                                <img src="./assets/images/creative-icon4.svg" alt="Icon 4"
+                                    class="w-full h-full object-contain">
+                            </div>
+                            <span class="text-6xl font-black step-number-stroke">04</span>
+                        </div>
+                        <p class="text-[#475569]  font-bold text-[15px] md:text-[16px] leading-relaxed">Now that your store is ready for
+                            sale, add your products</p>
+                    </div>
+                </div>
+
+                <!-- CTA Circle (Positioned absolutely) -->
+                <div id="cta-circle"
+                    class="hidden md:flex absolute left-[62%] bottom-[0px] -translate-x-1/2 w-[180px] h-[180px] bg-white border border-[#316C6B] rounded-full flex-col items-center justify-center text-center p-6 shadow-xl z-20 transition-all cursor-pointer overflow-hidden"
+                    style="perspective: 1000px; transform-style: preserve-3d;">
+                    <!-- Pulse/Glow Effect Layer -->
+                    <div
+                        class="cta-glow-layer absolute inset-0 bg-[#F5C99A]/20 rounded-full scale-100 opacity-0 pointer-events-none">
+                    </div>
+                    <!-- Fill Layer (Radial fill from edges) -->
+                    <div class="cta-fill-layer absolute inset-0 pointer-events-none"
+                        style="background: radial-gradient(circle, transparent 100%, #F5C99A 100%);"></div>
+                    <span class="text-[#316C6B] font-black text-[22px] leading-tight transition-colors relative z-10"
+                        style="transform: translateZ(30px);">Let's<br>Start<br>Now!</span>
+                </div>
+            </div>
+
+            <!-- Bottom Section -->
+            <div class="w-full mt-20 md:mt-2 flex flex-col md:flex-row items-center md:items-end md:justify-end gap-12 md:gap-16 text-center md:text-left">
+                <!-- Badge Center/Left -->
+                <div id="moving-badge" class="relative flex items-center justify-center md:justify-start shrink-0">
+                    <div class="w-72 relative">
+                        <img src="./assets/images/creative.svg" alt="Brush"
+                            class="w-full h-auto opacity-90 transform rotate-[-2deg]">
+                        <div class="absolute inset-0 flex items-center justify-center">
+                            <div class="bg-white shadow-xl rounded-full py-3 px-8 border border-slate-50">
+                                <span class="text-[15px] font-semibold text-[#475569] italic">No technical skills
+                                    required.</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Text Center/Right -->
+                <div class="max-w-[800px] md:max-w-[700px]">
+                    <p class="text-[#64748B] text-[15px] md:text-[16px] leading-relaxed font-medium opacity-80 mx-auto md:mx-0">
+                        Simple or Professional? Choose the plan that best suits your business, based on the level of
+                        features you require, then browse the ready-made designs and choose the one that suits you. All
+                        designs are available to all users at no additional charge. Or request your own custom design.
+                        Fill out the basic information and complete the payment in a quick and secure manner.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="different-section py-1 bg-white relative mb-40 overflow-hidden" id="different-section"
+        style="z-index: 1;">
+        <div class="max-w-[1440px] mx-auto px-[60px] relative">
+            <!-- Header Section -->
+            <div class="mb-16 text-center flex flex-col items-center">
+                <div class="flex flex-col md:flex-row items-center gap-3 mb-4 justify-center md:justify-start">
+                    <div class="flex items-center justify-center">
+                        <div class="w-12 h-[1px] bg-slate-400"></div>
+                        <div class="flex items-center -mx-1.5">
+                            <div class="w-3.5 h-3.5 rounded-full bg-[#F5C99A] border border-[#E5A158]"></div>
+                            <div class="w-3.5 h-3.5 rounded-full bg-white border border-slate-200 -ml-2"></div>
+                        </div>
+                        <div class="w-12 h-[1px] bg-slate-400"></div>
+                    </div>
+                    <span class="text-[14px] font-medium text-slate-500 tracking-wide text-center md:text-left">Our Services</span>
+                </div>
+                <h2 class="text-[22px] md:text-[32px] font-bold text-[#1A1A1A] leading-tight reveal-title mb-6">What Make Us Different?</h2>
+                <div class="w-full md:w-1/2 md:hidden">
+                    <p class="text-[#64748B] text-[15px] md:text-[16px] leading-relaxed font-medium mx-auto">
+                        We provide integrated solutions to help you launch your online store with ease, with continuous support and advanced technical tools.
+                    </p>
+                </div>
+            </div>
+
+            <div class="stacking-cards-container">
+                <!-- Card 01 -->
+                <div class="stack-card" style="z-index: 1;">
+                    <div class="stack-card-inner teal-bg">
+                        <img src="./assets/images/support-1.svg" alt="Online Store" class="stack-card-img">
+                        <div class="stack-card-content text-center md:text-left items-center md:items-start">
+                            <h3 class="text-[18px] md:text-[24px] font-medium leading-tight">Easy online store with your brand name</h3>
+                            <div class="flex flex-col md:flex-row items-center md:items-end justify-between mt-auto w-full">
+                                <span class="text-[120px] font-bold leading-none  ">01</span>
+                                <p class="text-[15px] md:text-[16px] leading-relaxed opacity-90 max-w-[400px] md:max-w-[340px] pb-6">Get your business name up and
+                                    running right away, without any complexity or technical expertise.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Card 02 -->
+                <div class="stack-card" style="z-index: 2;">
+                    <div class="stack-card-inner white-bg">
+                        <img src="./assets/images/support-2.svg" alt="Support" class="stack-card-img">
+                        <div class="stack-card-content text-center md:text-left items-center md:items-start">
+                            <h3 class="text-[18px] md:text-[24px] font-medium leading-tight">A dedicated account manager to support you
+                                every step of the way.</h3>
+                            <div class="flex flex-col md:flex-row items-center md:items-end justify-between mt-auto w-full">
+                                <span
+                                    class="text-[120px] font-bold leading-none stack-number-stroke mb-[20px] md:mb-[40px]">02</span>
+                                <p class="text-[15px] md:text-[16px] leading-relaxed text-slate-500 max-w-[400px] md:max-w-[340px] pb-6">
+                                    You'll have a dedicated account manager who will accompany you from the very
+                                    beginning until you achieve success, helping you and responding to your inquiries
+                                    quickly.
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Card 03 -->
+                <div class="stack-card" style="z-index: 3;">
+                    <div class="stack-card-inner teal-bg">
+                        <img src="./assets/images/support-3.svg" alt="Control Panel" class="stack-card-img">
+                        <div class="stack-card-content text-center md:text-left items-center md:items-start">
+                            <h3 class="text-[18px] md:text-[24px] font-medium leading-tight">Easy control panel with free training.</h3>
+                            <div class="flex flex-col md:flex-row items-center md:items-end justify-between mt-auto w-full">
+                                <span class="text-[120px] font-bold leading-none  ">03</span>
+                                <p class="text-[15px] md:text-[16px] leading-relaxed opacity-90 max-w-[400px] md:max-w-[340px] pb-6">The subscription comes with free
+                                    training sessions to teach you how to manage your store professionally.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Card 04 -->
+                <div class="stack-card" style="z-index: 4;">
+                    <div class="stack-card-inner white-bg">
+                        <img src="./assets/images/support-4.svg" alt="Integration" class="stack-card-img">
+                        <div class="stack-card-content text-center md:text-left items-center md:items-start">
+                            <h3 class="text-[18px] md:text-[24px] font-medium leading-tight">Instant integration with payment and
+                                delivery gateways</h3>
+                            <div class="flex flex-col md:flex-row items-center md:items-end justify-between mt-auto w-full">
+                                <span class="text-[120px] font-bold leading-none stack-number-stroke">04</span>
+                                <p class="text-[15px] md:text-[16px] leading-relaxed text-slate-500 max-w-[400px] md:max-w-[340px] pb-6">You can start selling
+                                    immediately with simple steps to activate payment and delivery with our help.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Card 05 -->
+                <div class="stack-card" style="z-index: 5;">
+                    <div class="stack-card-inner teal-bg">
+                        <img src="./assets/images/support-5.svg" alt="Reports" class="stack-card-img">
+                        <div class="stack-card-content text-center md:text-left items-center md:items-start">
+                            <h3 class="text-[18px] md:text-[24px] font-medium leading-tight">Financial reports and performance analysis
+                            </h3>
+                            <div class="flex flex-col md:flex-row items-center md:items-end justify-between mt-auto w-full">
+                                <span class="text-[120px] font-bold leading-none ">05</span>
+                                <p class="text-[15px] md:text-[16px] leading-relaxed opacity-90 max-w-[400px] md:max-w-[340px] pb-6">Real-time tracking of your store's
+                                    growth is provided by easy-to-read reports that help you make smart decisions.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <section id="services-section" class="services-section relative z-[2]">
+        <!-- Background Container (Directly under the section) -->
+        <div class="services-graphics-back">
+            <img src="./assets/images/support-watermark3.svg" alt="Trolley Teal" class="graphic-cart-service teal">
+        </div>
+
+        <!-- Inner Container (Between background and content) -->
+        <div class="services-graphics-inner">
+            <img src="./assets/images/support-watermark2.svg" alt="Trolley Orange" class="graphic-cart-service orange">
+        </div>
+
+        <div class="max-w-[1440px] mx-auto px-[60px] relative z-10">
+            <div class="flex flex-col md:flex-row items-center justify-between mb-10 text-white gap-6 md:gap-10 text-center md:text-left">
+                <!-- Left: Title and Badge -->
+                <div class="flex flex-col md:items-start items-center">
+                    <div class="flex flex-col md:flex-row items-center w-full mb-4">
+                        <div class="flex items-center justify-center">
+                            <div class="w-12 h-[1px] bg-white/90"></div>
+                            <div class="flex items-center -mx-1.5">
+                                <div class="w-3.5 h-3.5 rounded-full bg-[#F5C99A] border border-[#E5A158]"></div>
+                                <div class="w-3.5 h-3.5 rounded-full bg-white border border-slate-200 -ml-2"></div>
+                            </div>
+                            <div class="w-12 h-[1px] bg-white/90"></div>
+                        </div>
+                        <span class="text-[14px] font-normal !text-white tracking-wide text-center md:text-left">Additional</span>
+                    </div>
+                    <h2 class="text-[22px] md:text-[32px] font-semibold leading-tight reveal-title">Services we provide</h2>
+                </div>
+
+                <!-- Center: Description (50% width) -->
+                <div class="w-full md:w-1/2 reveal-up">
+                    <p class="text-white text-[15px] md:text-[16px] leading-relaxed mx-auto md:mx-0">
+                        Our support services are available in this section to help you integrate the work of your store
+                        and find everything you need in one place.
+                    </p>
+                </div>
+
+                <!-- Right: Pagination -->
+                <div id="service-pagination" class="text-[28px] md:text-[35px] font-semibold text-white">
+                    1/8
+                </div>
+            </div>
+
+            <!-- Horizontal Container for Cards -->
+            <div id="services-slider" class="flex gap-8 overflow-x-hidden py-5"
+                style="scrollbar-width: none; -ms-overflow-style: none;">
+                <style>
+                    #services-slider::-webkit-scrollbar {
+                        display: none;
+                    }
+                </style>
+                <!-- Card 1: Marketing -->
+                <div class="service-card flex-shrink-0 reveal-scale">
+                    <div class="service-img-wrapper">
+                        <img src="./assets/images/marketing.svg" alt="Digital Marketing Services for Online Stores"
+                            class="service-img">
+                    </div>
+                    <div class="service-content">
+                        <h3 class="service-title text-[18px] md:text-[24px] font-medium">Marketing</h3>
+                        <p class="service-desc text-[15px] md:text-[16px] leading-relaxed">Professional marketing strategies to increase your store's visibility
+                            and sales.</p>
+                        <button class="btn-learn-more" aria-label="Learn more about Marketing services">
+                            <span class="btn-original-text">Learn More</span>
+                            <div class="btn-marquee-wrapper">
+                                <span class="btn-marquee-text">Learn More</span>
+                            </div>
+                        </button>
+                    </div>
+                </div>
+                <!-- Card 2: Photography -->
+                <div class="service-card flex-shrink-0 reveal-scale">
+                    <div class="service-img-wrapper">
+                        <img src="./assets/images/photography.svg" alt="Professional Product Photography"
+                            class="service-img">
+                    </div>
+                    <div class="service-content">
+                        <h3 class="service-title text-[18px] md:text-[24px] font-medium">Photography</h3>
+                        <p class="service-desc text-[15px] md:text-[16px] leading-relaxed">High-quality product photography to showcase your items professionally.
+                        </p>
+                        <button class="btn-learn-more" aria-label="Learn more about Photography services">
+                            <span class="btn-original-text">Learn More</span>
+                            <div class="btn-marquee-wrapper">
+                                <span class="btn-marquee-text">Learn More</span>
+                            </div>
+                        </button>
+                    </div>
+                </div>
+                <!-- Card 3: Support -->
+                <div class="service-card flex-shrink-0 reveal-scale">
+                    <div class="service-img-wrapper">
+                        <img src="./assets/images/support.svg" alt="Technical Support and Customer Care"
+                            class="service-img">
+                    </div>
+                    <div class="service-content">
+                        <h3 class="service-title text-[18px] md:text-[24px] font-medium">Support</h3>
+                        <p class="service-desc text-[15px] md:text-[16px] leading-relaxed">Dedicated support team to help you manage and grow your online
+                            business.</p>
+                        <button class="btn-learn-more" aria-label="Learn more about Support services">
+                            <span class="btn-original-text">Learn More</span>
+                            <div class="btn-marquee-wrapper">
+                                <span class="btn-marquee-text">Learn More</span>
+                            </div>
+                        </button>
+                    </div>
+                </div>
+                <!-- Card 4: Social Media -->
+                <div class="service-card flex-shrink-0 reveal-scale">
+                    <div class="service-img-wrapper">
+                        <img src="https://images.unsplash.com/photo-1557804506-669a67965ba0?auto=format&fit=crop&w=500&q=60"
+                            alt="Social Media Management and Marketing" class="service-img">
+                    </div>
+                    <div class="service-content">
+                        <h3 class="service-title text-[18px] md:text-[24px] font-medium">Social Media</h3>
+                        <p class="service-desc text-[15px] md:text-[16px] leading-relaxed">Comprehensive social media management to engage with your target
+                            audience.</p>
+                        <button class="btn-learn-more" aria-label="Learn more about Social Media services">
+                            <span class="btn-original-text">Learn More</span>
+                            <div class="btn-marquee-wrapper">
+                                <span class="btn-marquee-text">Learn More</span>
+                            </div>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Group 2 (4 more cards) -->
+                <div class="service-card flex-shrink-0 reveal-scale">
+                    <div class="service-img-wrapper"><img src="./assets/images/marketing.svg" alt="Service"
+                            class="service-img"></div>
+                    <div class="service-content">
+                        <h3 class="service-title text-[18px] md:text-[24px] font-medium">E-Commerce Strategy</h3>
+                        <p class="service-desc text-[15px] md:text-[16px] leading-relaxed">Professional planning for your store growth and success.</p>
+                        <button class="btn-learn-more"><span class="btn-original-text">Learn More</span>
+                            <div class="btn-marquee-wrapper"><span class="btn-marquee-text">Learn More</span></div>
+                        </button>
+                    </div>
+                </div>
+                <div class="service-card flex-shrink-0 reveal-scale">
+                    <div class="service-img-wrapper"><img src="./assets/images/photography.svg" alt="Service"
+                            class="service-img"></div>
+                    <div class="service-content">
+                        <h3 class="service-title text-[18px] md:text-[24px] font-medium">SEO Optimization</h3>
+                        <p class="service-desc text-[15px] md:text-[16px] leading-relaxed">Professional planning for your store growth and success.</p>
+                        <button class="btn-learn-more"><span class="btn-original-text">Learn More</span>
+                            <div class="btn-marquee-wrapper"><span class="btn-marquee-text">Learn More</span></div>
+                        </button>
+                    </div>
+                </div>
+                <div class="service-card flex-shrink-0 reveal-scale">
+                    <div class="service-img-wrapper"><img src="./assets/images/support.svg" alt="Service"
+                            class="service-img"></div>
+                    <div class="service-content">
+                        <h3 class="service-title text-[18px] md:text-[24px] font-medium">Content Creation</h3>
+                        <p class="service-desc text-[15px] md:text-[16px] leading-relaxed">Professional planning for your store growth and success.</p>
+                        <button class="btn-learn-more"><span class="btn-original-text">Learn More</span>
+                            <div class="btn-marquee-wrapper"><span class="btn-marquee-text">Learn More</span></div>
+                        </button>
+                    </div>
+                </div>
+                <div class="service-card flex-shrink-0 reveal-scale">
+                    <div class="service-img-wrapper"><img
+                            src="https://images.unsplash.com/photo-1557804506-669a67965ba0?auto=format&fit=crop&w=500&q=60"
+                            alt="Service" class="service-img"></div>
+                    <div class="service-content">
+                        <h3 class="service-title text-[18px] md:text-[24px] font-medium">Branding</h3>
+                        <p class="service-desc text-[15px] md:text-[16px] leading-relaxed">Professional planning for your store growth and success.</p>
+                        <button class="btn-learn-more"><span class="btn-original-text">Learn More</span>
+                            <div class="btn-marquee-wrapper"><span class="btn-marquee-text">Learn More</span></div>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="logos-section py-10 bg-white">
+        <div class="max-w-[1440px] mx-auto px-[60px]">
+            <!-- Header Section -->
+            <div class="flex flex-col md:flex-row justify-between items-center mb-16 gap-8">
+                <div class="text-left">
+                    <div class="flex flex-col md:flex-row items-center w-full mb-4">
+                        <div class="flex items-center justify-center">
+                            <div class="w-12 h-[1px] bg-slate-400"></div>
+                            <div class="flex items-center -mx-1.5">
+                                <div class="w-3.5 h-3.5 rounded-full bg-[#F5C99A] border border-[#E5A158]"></div>
+                                <div class="w-3.5 h-3.5 rounded-full bg-white border border-slate-200 -ml-2"></div>
+                            </div>
+                            <div class="w-12 h-[1px] bg-slate-400"></div>
+                        </div>
+                        <span class="text-[14px] font-medium text-slate-500 tracking-wide text-center md:text-left">Success stories</span>
+                    </div>
+                    <h2 class="text-[22px] md:text-[32px] font-semibold text-[#1A1A1A] leading-tight reveal-title">Our Renowned
+                        Clients</h2>
+                </div>
+
+                <div class="flex flex-1 justify-center px-10 reveal-up text-center">
+                    <p class="text-[#212121] text-slate-500 text-[15px] md:text-[16px] max-w-[320px] text-center md:text-left leading-relaxed">Join
+                        the list of more than 500 brands that rely on E-trolley</p>
+                </div>
+
+                <div class="flex gap-4 relative z-[60]">
+                    <button id="prev-logos" aria-label="Previous Clients"
+                        class="w-10 h-10 rounded-full border border-slate-200 flex items-center justify-center text-slate-400 hover:bg-[#316C6B] hover:text-white transition-all bg-white shadow-sm cursor-pointer">
+                        <i class="fas fa-chevron-left text-[10px]"></i>
+                    </button>
+                    <button id="next-logos" aria-label="Next Clients"
+                        class="w-10 h-10 rounded-full border border-slate-200 flex items-center justify-center text-slate-400 hover:bg-[#316C6B] hover:text-white transition-all bg-white shadow-sm cursor-pointer">
+                        <i class="fas fa-chevron-right text-[10px]"></i>
+                    </button>
+                </div>
+            </div>
+
+            <!-- Clients Container (Strictly 239x205 for each item) -->
+            <div id="logos-slider" class="flex gap-10 overflow-x-auto hide-scrollbar p-4">
+                <!-- Client 1 -->
+                <div class="flex flex-col gap-4 items-center flex-shrink-0">
+                    <span class="text-[#316C6B] font-semibold text-center text-[16px]">Beauty Brand</span>
+                    <div class="client-logo-card" style="background-image: url('./assets/images/client1.svg');"
+                        role="img" aria-label="Client Store - Beauty Brand"></div>
+                </div>
+                <!-- Client 2 -->
+                <div class="flex flex-col gap-4 items-center flex-shrink-0">
+                    <span class="text-[#316C6B] font-semibold text-center text-[16px]">Fashion Store</span>
+                    <div class="client-logo-card" style="background-image: url('./assets/images/client2.svg');"
+                        role="img" aria-label="Client Store - Fashion Store"></div>
+                </div>
+                <!-- Client 3 -->
+                <div class="flex flex-col gap-4 items-center flex-shrink-0">
+                    <span class="text-[#316C6B] font-semibold text-center text-[16px]">Tech Hub</span>
+                    <div class="client-logo-card" style="background-image: url('./assets/images/client3.svg');"
+                        role="img" aria-label="Client Store - Tech Hub"></div>
+                </div>
+                <!-- Client 4 -->
+                <div class="flex flex-col gap-4 items-center flex-shrink-0">
+                    <span class="text-[#316C6B] font-semibold text-center text-[16px]">Flower Shop</span>
+                    <div class="client-logo-card" style="background-image: url('./assets/images/client4.svg');"
+                        role="img" aria-label="Client Store - Flower Shop"></div>
+                </div>
+                <!-- Client 5 -->
+                <div class="flex flex-col gap-4 items-center flex-shrink-0">
+                    <span class="text-[#316C6B] font-semibold text-center text-[16px]">Luxury Watches</span>
+                    <div class="client-logo-card" style="background-image: url('./assets/images/client5.svg');"
+                        role="img" aria-label="Client Store - Luxury Watches"></div>
+                </div>
+                <!-- Client 6 (Added for scrolling) -->
+                <div class="flex flex-col gap-4 items-center flex-shrink-0">
+                    <span class="text-[#316C6B] font-semibold text-center text-[16px]">Gifts Shop</span>
+                    <div class="client-logo-card" style="background-image: url('./assets/images/client1.svg');"
+                        role="img" aria-label="Client Store - Gifts Shop"></div>
+                </div>
+                <!-- Client 7 (Added for scrolling) -->
+                <div class="flex flex-col gap-4 items-center flex-shrink-0">
+                    <span class="text-[#316C6B] font-semibold text-center text-[16px]">Kids Wear</span>
+                    <div class="client-logo-card" style="background-image: url('./assets/images/client2.svg');"
+                        role="img" aria-label="Client Store - Kids Wear"></div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Partners Slider Section -->
+    <section class="partners-section">
+        <div class="max-w-[1440px] mx-auto px-[60px]">
+            <div class="partners-container">
+                <h3 class="partners-label text-[18px] md:text-[24px] font-medium">Our Partners</h3>
+                <div class="slider-wrapper">
+                    <div class="slider-track">
+                        <!-- First Set -->
+                        <div class="slider-item"><img src="./assets/images/partner1.svg" alt="Trusted Partner 1"></div>
+                        <div class="slider-item"><img src="./assets/images/partner2.svg" alt="Trusted Partner 2"></div>
+                        <div class="slider-item"><img src="./assets/images/partner3.svg" alt="Trusted Partner 3"></div>
+                        <div class="slider-item"><img src="./assets/images/partner4.svg" alt="Trusted Partner 4"></div>
+                        <div class="slider-item"><img src="./assets/images/partner5.svg" alt="Trusted Partner 5"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="designs-section">
+        <div class="max-w-[1440px] mx-auto px-[60px] relative z-10">
+            <!-- Header Section -->
+            <div class="flex flex-col md:flex-row justify-between items-center md:items-end mb-2 gap-8">
+                <div class="text-center md:text-left w-full md:w-auto">
+                    <div class="flex flex-col md:flex-row items-center w-full mb-4 justify-center md:justify-start">
+                        <div class="flex items-center justify-center">
+                            <div class="w-12 h-[1px] bg-slate-400"></div>
+                            <div class="flex items-center -mx-1.5">
+                                <div class="w-3.5 h-3.5 rounded-full bg-[#F5C99A] border border-[#E5A158]"></div>
+                                <div class="w-3.5 h-3.5 rounded-full bg-white border border-slate-200 -ml-2"></div>
+                            </div>
+                            <div class="w-12 h-[1px] bg-slate-400"></div>
+                        </div>
+                        <span class="text-[14px] font-medium text-slate-500 tracking-wide">Select one</span>
+                    </div>
+                    <h2 class="text-[22px] md:text-[32px] font-semibold text-[#1A1A1A] leading-tight reveal-title text-center md:text-left">Distinctive
+                        Designs</h2>
+                </div>
+                <div class="flex gap-3 relative z-50 justify-center w-full md:w-auto">
+                    <button id="prev-designs"
+                        class="w-12 h-12 rounded-full border border-slate-200 flex items-center justify-center text-slate-400 hover:bg-[#316C6B] hover:text-white transition-all cursor-pointer">
+                        <i class="fas fa-chevron-left text-xs"></i>
+                    </button>
+                    <button id="next-designs"
+                        class="w-12 h-12 rounded-full border border-slate-200 flex items-center justify-center text-slate-400 hover:bg-[#316C6B] hover:text-white transition-all cursor-pointer">
+                        <i class="fas fa-chevron-right text-xs"></i>
+                    </button>
+                </div>
+            </div>
+
+            <!-- Designs Container (Scrollable) -->
+            <div id="designs-slider" class="flex gap-6 overflow-x-auto hide-scrollbar py-6">
+                <!-- Design 1: Health & Beauty -->
+                <div class="design-card flex-shrink-0">
+                    <div class="design-icon-wrapper">
+                        <img src="./assets/images/ecommerce1.svg" alt="Health and Beauty">
+                    </div>
+                    <span class="design-label">Health & Beauty</span>
+                </div>
+                <!-- Design 2: Perfumes -->
+                <div class="design-card flex-shrink-0">
+                    <div class="design-icon-wrapper">
+                        <img src="./assets/images/ecommerce2.svg" alt="Perfumes">
+                    </div>
+                    <span class="design-label">Perfumes</span>
+                </div>
+                <!-- Design 3: Electronics -->
+                <div class="design-card flex-shrink-0">
+                    <div class="design-icon-wrapper">
+                        <img src="./assets/images/ecommerce3.svg" alt="Electronics">
+                    </div>
+                    <span class="design-label">Electronics</span>
+                </div>
+                <!-- Design 4: Flowers -->
+                <div class="design-card flex-shrink-0">
+                    <div class="design-icon-wrapper">
+                        <img src="./assets/images/ecommerce4.svg" alt="Flowers">
+                    </div>
+                    <span class="design-label">Flowers</span>
+                </div>
+                <!-- Design 5: Outfits -->
+                <div class="design-card flex-shrink-0">
+                    <div class="design-icon-wrapper">
+                        <img src="./assets/images/ecommerce5.svg" alt="Outfits">
+                    </div>
+                    <span class="design-label">Outfits</span>
+                </div>
+                <!-- Design 6: Accessories -->
+                <div class="design-card flex-shrink-0">
+                    <div class="design-icon-wrapper">
+                        <img src="./assets/images/ecommerce1.svg" alt="Accessories">
+                    </div>
+                    <span class="design-label">Accessories</span>
+                </div>
+                <!-- Design 7: Beauty Care -->
+                <div class="design-card flex-shrink-0">
+                    <div class="design-icon-wrapper">
+                        <img src="./assets/images/ecommerce2.svg" alt="Beauty Care">
+                    </div>
+                    <span class="design-label">Beauty Care</span>
+                </div>
+                <!-- Design 8: Home Decor -->
+                <div class="design-card flex-shrink-0">
+                    <div class="design-icon-wrapper">
+                        <img src="./assets/images/ecommerce3.svg" alt="Home Decor">
+                    </div>
+                    <span class="design-label">Home Decor</span>
+                </div>
+                <!-- Design 9: Sports -->
+                <div class="design-card flex-shrink-0">
+                    <div class="design-icon-wrapper">
+                        <img src="./assets/images/ecommerce4.svg" alt="Sports">
+                    </div>
+                    <span class="design-label">Sports</span>
+                </div>
+                <!-- Design 10: Watches -->
+                <div class="design-card flex-shrink-0">
+                    <div class="design-icon-wrapper">
+                        <img src="./assets/images/ecommerce5.svg" alt="Watches">
+                    </div>
+                    <span class="design-label">Watches</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Support Banner Section -->
+    <section class="support-banner-section">
+        <div class="support-banner-container">
+            <!-- Background Layer (Teal Trolley) under all layers -->
+            <div class="support-graphics-back">
+                <img src="./assets/images/support-watermark1.svg" alt="Decorative Background Trolley Icon"
+                    class="graphic-cart teal">
+            </div>
+
+            <!-- Main Card -->
+            <div class="support-banner-card">
+                <!-- Inner Background Layer (Orange Trolley) restricted by card boundaries -->
+                <div class="support-graphics-inner-back">
+                    <img src="./assets/images/support-watermark2.svg" alt="Decorative Interior Trolley Icon"
+                        class="graphic-cart orange">
+                </div>
+
+                <div class="support-banner-content">
+                    <div class="support-badge flex flex-col md:flex-row items-center w-full mb-4">
+                        <div class="flex items-center justify-center">
+                            <div class="w-12 h-[1px] bg-slate-400"></div>
+                            <div class="flex items-center -mx-1.5">
+                                <div class="w-3.5 h-3.5 rounded-full bg-[#F5C99A] border border-[#E5A158]"></div>
+                                <div class="w-3.5 h-3.5 rounded-full bg-white border border-slate-200 -ml-2"></div>
+                            </div>
+                            <div class="w-12 h-[1px] bg-slate-400"></div>
+                        </div>
+                        <span class="support-badge-text reveal-up text-center md:text-left">Support & Help</span>
+                    </div>
+                    <h2 class="support-banner-title reveal-title text-[22px] md:text-[32px] font-semibold">
+                        Are you in need of assistance or have a question?
+                    </h2>
+                </div>
+                <div class="support-actions reveal-up">
+                    <a href="https://wa.me/97450988700" target="_blank" class="support-icon-btn whatsapp"
+                        aria-label="Contact us on WhatsApp">
+                        <i class="fa-brands fa-whatsapp"></i>
+                    </a>
+                    <a href="tel:+97450988700" class="support-icon-btn phone" aria-label="Call E-trolley Support">
+                        <i class="fa-solid fa-phone"></i>
+                    </a>
+                    <a href="mailto:info@etrolley.net" class="support-icon-btn email" aria-label="Send us an Email">
+                        <img src="./assets/images/gmail.svg" alt="Gmail Contact" class="w-8 h-8">
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    </main>
+
+    <footer>
+        <div class="max-w-[1440px] mx-auto px-[60px]">
+            <div class="footer-grid">
+                <div>
+                    <div class="footer-logo-box">
+                        <img src="./assets/images/footer-logo.svg" alt="E-Trolley Official Footer Logo">
+                    </div>
+                </div>
+                <div>
+                    <h4 class="footer-title">Quick Links</h4>
+                    <ul class="footer-links" style="margin-bottom: 40px;">
+                        <li><a href="#" class="footer-link active">Terms & Conditions</a></li>
+                        <li><a href="#" class="footer-link">Privacy Policy</a></li>
+                    </ul>
+                    <h4 class="footer-title">Social Media</h4>
+                    <div class="footer-social-links">
+                        <a href="#" class="footer-social-link" aria-label="Follow us on Instagram"><i
+                                class="fab fa-instagram"></i></a>
+                        <a href="#" class="footer-social-link" aria-label="Follow us on Facebook"><i
+                                class="fab fa-facebook-f"></i></a>
+                        <a href="#" class="footer-social-link" aria-label="Follow us on YouTube"><i
+                                class="fab fa-youtube"></i></a>
+                        <a href="#" class="footer-social-link" aria-label="Follow us on TikTok"><i
+                                class="fab fa-tiktok"></i></a>
+                    </div>
+                </div>
+                <div>
+                    <h4 class="footer-title">Site Map</h4>
+                    <ul class="footer-links">
+                        <li><a href="#" class="footer-link active">Home</a></li>
+                        <li><a href="#" class="footer-link">Services</a></li>
+                        <li><a href="#" class="footer-link">Prices</a></li>
+                        <li><a href="#" class="footer-link">About Us</a></li>
+                        <li><a href="#" class="footer-link">Contact Us</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 class="footer-title">Let's keep in touch</h4>
+                    <div class="contact-item">
+                        <div class="contact-icon"><i class="fa-solid fa-phone"></i></div>
+                        <a href="tel:+97450988700" style="text-decoration: none; color: inherit;">(+974)50988700</a>
+                    </div>
+                    <div class="contact-item">
+                        <div class="contact-icon"><i class="fa-solid fa-envelope"></i></div>
+                        <div>
+                            <a href="mailto:info@etrolley.net" style="text-decoration: none; color: inherit; display: block;">info@etrolley.net</a>
+                            <a href="mailto:sales@etrolley.net" style="text-decoration: none; color: inherit; display: block;">sales@etrolley.net</a>
+                        </div>
+                    </div>
+                    <div class="contact-item">
+                        <div class="contact-icon"><i class="fa-solid fa-location-dot"></i></div>
+                        <span>Qatar - Doha - Khalifa City</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="footer-main-btn-wrapper">
+                <button class="footer-main-btn" aria-label="Build your professional store now">Build Your Store
+                    Now</button>
+            </div>
+
+            <div class="bottom-bar">
+                <div>© 2026 E-trolley All Rights Reserved</div>
+                <div class="bottom-links">
+                    <a href="#" class="bottom-link">Privacy Policy</a>
+                    <span class="bottom-separator">/</span>
+                    <a href="#" class="bottom-link">Terms & Condition</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <!-- GSAP & ScrollTrigger -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+
+    <!-- Lenis Smooth Scroll (The best free alternative to ScrollSmoother) -->
+    <script src="https://unpkg.com/lenis@1.1.13/dist/lenis.min.js"></script>
+    <link rel="stylesheet" href="https://unpkg.com/lenis@1.1.13/dist/lenis.css">
+
+    <script src="./js/script.js"></script>
+</body>
+
+</html>
