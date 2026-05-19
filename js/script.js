@@ -1,27 +1,46 @@
-// --- Smooth Scroll (Lenis) ---
-const lenis = new Lenis({
-    duration: 1.5,
-    easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
-    orientation: 'vertical',
-    gestureOrientation: 'vertical',
-    smoothWheel: true,
-    wheelMultiplier: 0.9,
-    smoothTouch: false,
-    touchMultiplier: 1.5,
-    infinite: false,
+// --- Scroll to Top Feature ---
+const scrollToTopBtn = document.getElementById('scroll-to-top');
+
+if (scrollToTopBtn) {
+    window.addEventListener('scroll', () => {
+        if (window.scrollY > 300) {
+            scrollToTopBtn.classList.add('show');
+        } else {
+            scrollToTopBtn.classList.remove('show');
+        }
+    });
+
+    scrollToTopBtn.addEventListener('click', () => {
+        window.scrollTo({
+            top: 0,
+            behavior: 'smooth'
+        });
+    });
+}
+
+// --- GSAP ScrollSmoother Initialization ---
+gsap.registerPlugin(ScrollTrigger, ScrollSmoother);
+
+let smoother = ScrollSmoother.create({
+    wrapper: "#smooth-wrapper",
+    content: "#smooth-content",
+    smooth: 2, // مدة التمرير السلس لجعل الحركة فخمة وانسيابية جداً
+    effects: true, // تفعيل تأثيرات Parallax و Speed
+    smoothTouch: 0.1, 
 });
 
-lenis.on('scroll', ScrollTrigger.update);
-
-gsap.ticker.add((time) => {
-    lenis.raf(time * 1000);
+// تحديث ScrollTrigger عند تغيير حجم النافذة لضمان دقة الحسابات
+window.addEventListener("resize", () => {
+    ScrollTrigger.refresh();
 });
-
-gsap.ticker.lagSmoothing(0);
 
 // --- AOS Initialization ---
 if (typeof AOS !== 'undefined') {
-    AOS.init({ duration: 1000, once: true });
+    AOS.init({ 
+        duration: 1200, 
+        once: true,
+        easing: 'ease-out-quad'
+    });
 }
 
 // --- Page Loader ---
@@ -29,7 +48,8 @@ window.addEventListener('load', function () {
     const loader = document.getElementById('loader-wrapper');
     const body = document.body;
 
-    lenis.stop();
+    // إيقاف السكرول أثناء التحميل
+    smoother.paused(true);
 
     if (loader) {
         const tl = gsap.timeline();
@@ -53,7 +73,10 @@ window.addEventListener('load', function () {
             .set(loader, { visibility: 'hidden' })
             .call(() => {
                 body.classList.remove('loading');
-                lenis.start();
+                // تشغيل السكرول بعد انتهاء التحميل
+                smoother.paused(false);
+                // تحديث الحسابات لضمان ظهور كل العناصر
+                ScrollTrigger.refresh();
             });
     }
 });
@@ -68,7 +91,6 @@ setTimeout(() => {
 }, 4000);
 
 // --- Stacking Cards ---
-gsap.registerPlugin(ScrollTrigger);
 const cards = gsap.utils.toArray('.stack-card');
 
 if (cards.length > 0) {
@@ -78,22 +100,61 @@ if (cards.length > 0) {
         const tl = gsap.timeline({
             scrollTrigger: {
                 trigger: "#different-section",
-                start: "top top",
-                end: () => `+=${cards.length * 100}%`,
+                start: "top 60px",
+                end: () => `+=${cards.length * 250}%`, 
                 pin: true,
-                scrub: 2,
+                scrub: 1, // توازن بين السرعة والنعومة
                 markers: false,
             }
         });
 
+        // تحريك العنوان بنعومة وفخامة
+        tl.to(".different-header-wrapper", {
+            y: -80,
+            opacity: 0,
+            filter: "blur(15px)",
+            duration: 1.5,
+            ease: "power2.inOut"
+        }, 0);
+
         cards.forEach((card, i) => {
+            // حركة ظهور البطاقة: تبدأ شفافة تماماً وتصبح صلبة فوق البطاقة السابقة
             if (i > 0) {
-                tl.from(card, {
-                    yPercent: 100,
-                    opacity: 0,
-                    ease: "power2.out",
-                    duration: 1,
-                }, i * 0.8);
+                tl.fromTo(card, 
+                    { 
+                        yPercent: 120, // تبدأ من خارج الرؤية
+                        opacity: 0, // شفافة تماماً عند البداية
+                        scale: 0.9, // أصغر قليلاً
+                        filter: "blur(10px)", // ضبابية خفيفة لمظهر ناعم
+                    },
+                    { 
+                        yPercent: 0, 
+                        opacity: 1, // تصبح صلبة تماماً
+                        scale: 1,
+                        filter: "blur(0px)",
+                        duration: 2, 
+                        ease: "power3.out" // دخول انسيابي وفخم
+                    }, 
+                    i * 5 // توقيت الدخول
+                );
+            }
+
+            // حركة كشف النص (الرفع للأعلى 230 بكسل) لتتمكن من القراءة بوضوح
+            tl.to(card, {
+                y: -230,
+                duration: 2.5,
+                ease: "none"
+            }, i * 5 + 1.8); // تبدأ بعد أن تستقر البطاقة وتصبح واضحة تماماً
+
+            // بقاء البطاقة السابقة ثابتة خلفها لتعزيز الاحترافية
+            if (i < cards.length - 1) {
+                tl.to(card, {
+                    scale: 0.95,
+                    opacity: 0.7,
+                    filter: "blur(4px)",
+                    duration: 2,
+                    ease: "power2.inOut"
+                }, (i + 1) * 5 - 0.5);
             }
         });
     } else {
@@ -316,151 +377,116 @@ serviceCards.forEach((card, index) => {
     });
 });
 
-// --- Services Slider ---
+// --- Services Slider (Drag & Swipe) ---
 const servicesSlider = document.getElementById('services-slider');
 const paginationText = document.getElementById('service-pagination');
 
 if (servicesSlider && paginationText) {
-    let isAnimating = false;
-    let currentIndex = 0;
-    const cards = servicesSlider.querySelectorAll('.service-card');
-    const totalCards = cards.length;
-
-    let startX = 0;
     let isDragging = false;
-    let scrollStartX = 0;
-    let dragDistance = 0;
-
-    const updateSlider = () => {
-        isAnimating = true;
-        const cardWidth = cards[0].offsetWidth;
-        const gap = 32;
-        const targetScroll = currentIndex * (cardWidth + gap);
-
-        gsap.to(servicesSlider, {
-            scrollLeft: targetScroll,
-            duration: 0.9,
-            ease: "power2.out",
-            overwrite: "auto",
-            onComplete: () => {
-                isAnimating = false;
-            }
-        });
-
-        gsap.to(paginationText, {
-            y: -15,
-            opacity: 0,
-            duration: 0.3,
-            onComplete: () => {
-                paginationText.innerText = `${currentIndex + 1}/${totalCards}`;
-                gsap.fromTo(paginationText, { y: 15, opacity: 0 }, { y: 0, opacity: 1, duration: 0.4 });
-            }
-        });
-    };
+    let startX;
+    let scrollLeft;
+    let velocity = 0;
+    let rafID;
 
     const onStart = (e) => {
+        // السماح بالنقر على الأزرار داخل البطاقة
         if (e.target.closest('.btn-learn-more')) return;
 
         isDragging = true;
-        startX = (e.type === 'mousedown') ? e.clientX : e.touches[0].clientX;
-        scrollStartX = servicesSlider.scrollLeft;
-        dragDistance = 0;
-
+        servicesSlider.classList.add('active');
+        startX = (e.type === 'mousedown') ? e.pageX : e.touches[0].pageX;
+        scrollLeft = servicesSlider.scrollLeft;
+        
+        cancelAnimationFrame(rafID);
         servicesSlider.style.cursor = 'grabbing';
-        gsap.killTweensOf(servicesSlider);
-        isAnimating = false;
+        servicesSlider.style.userSelect = 'none';
     };
 
     const onMove = (e) => {
         if (!isDragging) return;
-        const x = (e.type === 'mousemove') ? e.clientX : e.touches[0].clientX;
-        dragDistance = startX - x;
+        e.preventDefault();
+        const x = (e.type === 'mousemove') ? e.pageX : e.touches[0].pageX;
+        const walk = (x - startX) * 2; // سرعة السحب
+        const prevScrollLeft = servicesSlider.scrollLeft;
+        servicesSlider.scrollLeft = scrollLeft - walk;
+        velocity = servicesSlider.scrollLeft - prevScrollLeft;
+    };
 
-        gsap.to(servicesSlider, {
-            scrollLeft: scrollStartX + dragDistance,
-            duration: 0.1,
-            ease: "none",
-            overwrite: true
+    const onEnd = () => {
+        if (!isDragging) return;
+        isDragging = false;
+        servicesSlider.classList.remove('active');
+        servicesSlider.style.cursor = 'grab';
+        servicesSlider.style.removeProperty('user-select');
+        
+        // تأثير القصور الذاتي (Momentum Scroll)
+        applyMomentum();
+        updatePagination();
+    };
+
+    const applyMomentum = () => {
+        if (Math.abs(velocity) > 0.5) {
+            servicesSlider.scrollLeft += velocity;
+            velocity *= 0.95; // معامل الاحتكاك
+            rafID = requestAnimationFrame(applyMomentum);
+        }
+    };
+
+    const updatePagination = () => {
+        const cardWidth = servicesSlider.querySelector('.service-card').offsetWidth + 40;
+        const currentIndex = Math.round(servicesSlider.scrollLeft / cardWidth);
+        const totalCards = servicesSlider.querySelectorAll('.service-card').length;
+        
+        gsap.to(paginationText, {
+            y: -10,
+            opacity: 0,
+            duration: 0.3,
+            onComplete: () => {
+                paginationText.innerText = `${currentIndex + 1}/${totalCards}`;
+                gsap.to(paginationText, { y: 0, opacity: 1, duration: 0.3 });
+            }
         });
     };
 
-    const onEnd = (e) => {
-        if (!isDragging) return;
-        isDragging = false;
-        servicesSlider.style.cursor = 'grab';
-
-        const dragThreshold = 60;
-
-        if (Math.abs(dragDistance) > dragThreshold) {
-            if (dragDistance > 0 && currentIndex < totalCards - 1) {
-                currentIndex++;
-            } else if (dragDistance < 0 && currentIndex > 0) {
-                currentIndex--;
-            }
-        } else {
-            const rect = servicesSlider.getBoundingClientRect();
-            const clientX = (e.type === 'mouseup') ? e.clientX : (e.changedTouches ? e.changedTouches[0].clientX : startX);
-            const clickX = clientX - rect.left;
-            const centerX = rect.width / 2;
-
-            if (clickX > centerX) {
-                if (currentIndex < totalCards - 1) currentIndex++;
-                else currentIndex = 0;
-            } else {
-                if (currentIndex > 0) currentIndex--;
-                else currentIndex = totalCards - 1;
-            }
-        }
-
-        updateSlider();
-    };
-
     servicesSlider.addEventListener('mousedown', onStart);
-    window.addEventListener('mousemove', onMove);
-    window.addEventListener('mouseup', onEnd);
-    servicesSlider.addEventListener('touchstart', onStart, { passive: true });
-    servicesSlider.addEventListener('touchmove', onMove, { passive: true });
-    servicesSlider.addEventListener('touchend', onEnd, { passive: true });
-
-    paginationText.innerText = `1/${totalCards}`;
+    servicesSlider.addEventListener('mousemove', onMove);
+    servicesSlider.addEventListener('mouseup', onEnd);
+    servicesSlider.addEventListener('mouseleave', onEnd);
+    
+    servicesSlider.addEventListener('touchstart', onStart, { passive: false });
+    servicesSlider.addEventListener('touchmove', onMove, { passive: false });
+    servicesSlider.addEventListener('touchend', onEnd);
 }
 
-// --- Footer Parallax ---
+// --- Footer Reveal Effect (Fixed Reveal) ---
 const footer = document.querySelector('footer');
-const footerContent = footer ? footer.querySelectorAll('.footer-grid > div, .footer-main-btn-wrapper, .bottom-bar') : [];
+const footerSpacer = document.querySelector('.footer-reveal-spacer');
 
-if (footer) {
+if (footer && footerSpacer) {
     const updateFooterSpace = () => {
         const footerHeight = footer.offsetHeight;
-        document.querySelector('.support-banner-section').style.marginBottom = footerHeight + 'px';
+        // ضبط طول المساحة الشفافة لتكون بنفس طول الفوتر تماماً
+        footerSpacer.style.height = footerHeight + 'px';
+        
+        // التأكد من أن الفوتر ثابت في الخلفية
+        gsap.set(footer, { 
+            position: 'fixed',
+            bottom: 0,
+            left: 0,
+            width: '100%',
+            zIndex: 5,
+            visibility: 'visible',
+            opacity: 1
+        });
+        
+        ScrollTrigger.refresh();
     };
 
+    window.addEventListener('load', () => {
+        setTimeout(updateFooterSpace, 300);
+    });
     window.addEventListener('resize', updateFooterSpace);
     updateFooterSpace();
-
-    const footerTl = gsap.timeline({
-        scrollTrigger: {
-            trigger: ".support-banner-section",
-            start: "bottom bottom",
-            end: "+=" + footer.offsetHeight,
-            scrub: true,
-        }
-    });
-
-    footerTl.fromTo(footer,
-        { yPercent: -50, scale: 0.9, filter: "blur(10px)", opacity: 0 },
-        { yPercent: 0, scale: 1, filter: "blur(0px)", opacity: 1, ease: "none" }
-    );
-
-    if (footerContent.length > 0) {
-        footerTl.from(footerContent, {
-            y: 50,
-            opacity: 0,
-            stagger: 0.1,
-            duration: 0.8,
-            ease: "power2.out"
-        }, 0.1);
-    }
 }
 
 // --- Global Reveal ---
@@ -468,14 +494,14 @@ const revealElements = document.querySelectorAll('.reveal-up, .reveal-scale');
 revealElements.forEach((el) => {
     const isScale = el.classList.contains('reveal-scale');
     gsap.from(el, {
-        y: isScale ? 0 : 50,
-        scale: isScale ? 0.9 : 1,
+        y: isScale ? 0 : 60, // Slightly more movement (50 -> 60)
+        scale: isScale ? 0.85 : 1, // More dramatic scale (0.9 -> 0.85)
         opacity: 0,
-        duration: 1.2,
-        ease: "power3.out",
+        duration: 1.5, // Reference site uses 1.5s
+        ease: "power2.out", // Reference site uses power2.out
         scrollTrigger: {
             trigger: el,
-            start: "top 85%",
+            start: "top 88%", // Trigger slightly later for better flow
             toggleActions: "play none none none"
         }
     });
@@ -484,14 +510,14 @@ revealElements.forEach((el) => {
 const revealTitles = document.querySelectorAll('.reveal-title');
 revealTitles.forEach((title) => {
     gsap.from(title, {
-        y: 30,
+        y: 40, // (30 -> 40)
         opacity: 0,
-        skewY: 3,
-        duration: 1.5,
-        ease: "power4.out",
+        skewY: 2, // Less skew for cleaner look (3 -> 2)
+        duration: 1.8, // More elegant duration (1.5 -> 1.8)
+        ease: "power3.out",
         scrollTrigger: {
             trigger: title,
-            start: "top 90%"
+            start: "top 92%"
         }
     });
 });
@@ -778,9 +804,241 @@ if (stepCards.length > 0) {
         },
         y: 50,
         opacity: 0,
-        duration: 0.8,
-        stagger: 0.2,
+        duration: 1.5,
+        stagger: 0.15,
         ease: "power2.out",
         clearProps: "all"
     });
 }
+
+// --- Magnetic CTA Circle Effect (psstudios style) ---
+const ctaWrapper = document.querySelector('.cta-circle-wrapper');
+if (ctaWrapper) {
+    const ctaFill = ctaWrapper.querySelector('.cta-fill');
+    const ctaText = ctaWrapper.querySelector('span');
+    const proximityThreshold = 250; 
+    const magneticStrength = 0.5; 
+
+    ctaWrapper.addEventListener('mouseenter', (e) => {
+        const rect = ctaWrapper.getBoundingClientRect();
+        const relX = e.clientX - rect.left;
+        const relY = e.clientY - rect.top;
+        
+        // ضبط المركز وتكبير الدائرة فوراً لتغطية كل المساحة
+        gsap.set(ctaFill, {
+            x: relX,
+            y: relY,
+            xPercent: -50,
+            yPercent: -50,
+            scale: 0
+        });
+        
+        gsap.to(ctaFill, {
+            scale: 2.5, // تكبير كافٍ لتغطية الدائرة مهما كان مكان الدخول
+            duration: 0.5,
+            ease: "power2.out",
+            overwrite: true
+        });
+        
+        gsap.to(ctaText, {
+            color: "#FFFFFF",
+            duration: 0.2
+        });
+    });
+
+    window.addEventListener('mousemove', (e) => {
+        const rect = ctaWrapper.getBoundingClientRect();
+        const centerX = rect.left + rect.width / 2;
+        const centerY = rect.top + rect.height / 2;
+
+        const distanceX = e.clientX - centerX;
+        const distanceY = e.clientY - centerY;
+        const distance = Math.sqrt(distanceX * distanceX + distanceY * distanceY);
+
+        if (distance < proximityThreshold) {
+            const moveX = distanceX * magneticStrength;
+            const moveY = distanceY * magneticStrength;
+
+            gsap.to(ctaWrapper, {
+                x: moveX,
+                y: moveY,
+                duration: 0.4,
+                ease: "power2.out"
+            });
+
+            // جعل التعبئة تتبع الفأرة بدقة داخل الدائرة
+            const relX = e.clientX - rect.left;
+            const relY = e.clientY - rect.top;
+            gsap.to(ctaFill, {
+                x: relX,
+                y: relY,
+                duration: 0.3,
+                ease: "power1.out"
+            });
+
+            gsap.to(ctaText, {
+                x: moveX * 0.3,
+                y: moveY * 0.3,
+                duration: 0.4,
+                ease: "power2.out"
+            });
+        } else {
+            gsap.to(ctaWrapper, {
+                x: 0,
+                y: 0,
+                duration: 0.8,
+                ease: "elastic.out(1, 0.3)"
+            });
+
+            gsap.to(ctaText, {
+                x: 0,
+                y: 0,
+                duration: 0.8,
+                ease: "elastic.out(1, 0.3)"
+            });
+        }
+    });
+
+    ctaWrapper.addEventListener('mouseleave', (e) => {
+        const rect = ctaWrapper.getBoundingClientRect();
+        const relX = e.clientX - rect.left;
+        const relY = e.clientY - rect.top;
+        
+        // سحب اللون وتصغيره عند نقطة الخروج
+        gsap.to(ctaFill, {
+            x: relX,
+            y: relY,
+            scale: 0,
+            duration: 0.4,
+            ease: "power2.in",
+            overwrite: true
+        });
+
+        gsap.to(ctaText, {
+            color: "#316C6B",
+            duration: 0.3
+        });
+    });
+}
+
+// --- Title Click Animation ---
+const animateTitles = document.querySelectorAll('.click-animate-title');
+
+animateTitles.forEach(title => {
+    // Split each span's text into letters
+    const spans = title.querySelectorAll('span');
+    spans.forEach(span => {
+        const text = span.textContent;
+        span.innerHTML = '';
+        [...text].forEach(char => {
+            const letter = document.createElement('span');
+            letter.style.display = 'inline-block';
+            letter.textContent = char === ' ' ? '\u00A0' : char;
+            
+            // إضافة حدث النقر لكل حرف على حدة
+            letter.addEventListener('click', (e) => {
+                e.stopPropagation();
+                
+                // مصفوفة ألوان الهوية البصرية (ذهبي، تيل)
+                const brandColors = ["#F5C99A", "#316C6B"];
+                const randomColor = brandColors[Math.floor(Math.random() * brandColors.length)];
+                
+                // تأثير نبض الحرف وتغيير لونه
+                gsap.to(letter, {
+                    color: randomColor,
+                    scale: 1.4,
+                    y: -10,
+                    duration: 0.4,
+                    yoyo: true,
+                    repeat: 1,
+                    ease: "back.out(2)",
+                    onStart: () => {
+                        letter.classList.add('active-char');
+                        letter.style.textShadow = 'none'; // إزالة الظل مؤقتاً لبروز اللون
+                    },
+                    onComplete: () => {
+                        letter.classList.remove('active-char');
+                        if (letter.closest('.title-stroke')) {
+                            letter.style.textShadow = ''; // إعادة الظل للنص المفرغ
+                        }
+                    }
+                });
+            });
+            
+            span.appendChild(letter);
+        });
+    });
+
+    title.addEventListener('click', () => {
+        const letters = title.querySelectorAll('span span');
+        
+        // Reset any ongoing animations
+        gsap.killTweensOf(letters);
+        
+        // Premium stagger animation
+        gsap.fromTo(letters, 
+            { 
+                y: 0,
+                rotate: 0,
+                scale: 1
+            }, 
+            {
+                y: -15,
+                rotate: 10,
+                scale: 1.2,
+                duration: 0.4,
+                stagger: {
+                    amount: 0.4,
+                    from: "center"
+                },
+                ease: "back.out(2)",
+                onComplete: () => {
+                    gsap.to(letters, {
+                        y: 0,
+                        rotate: 0,
+                        scale: 1,
+                        duration: 0.6,
+                        stagger: {
+                            amount: 0.3,
+                            from: "center"
+                        },
+                        ease: "elastic.out(1, 0.3)"
+                    });
+                }
+            }
+        );
+    });
+
+    // إضافة أنيميشن عند الـ Hover ليعطي انطباعاً تفاعلياً فورياً
+    title.addEventListener('mouseenter', () => {
+        const letters = title.querySelectorAll('span span');
+        gsap.killTweensOf(letters);
+        gsap.fromTo(letters, 
+            { y: 0, rotate: 0, scale: 1 }, 
+            {
+                y: -12,
+                rotate: 8,
+                scale: 1.15,
+                duration: 0.4,
+                stagger: {
+                    amount: 0.3,
+                    from: "start"
+                },
+                ease: "power2.out",
+                onComplete: () => {
+                    gsap.to(letters, {
+                        y: 0,
+                        rotate: 0,
+                        scale: 1,
+                        duration: 0.5,
+                        stagger: {
+                            amount: 0.2,
+                            from: "start"
+                        },
+                        ease: "elastic.out(1, 0.4)"
+                    });
+                }
+            }
+        );
+    });
+});

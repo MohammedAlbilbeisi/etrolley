@@ -32,9 +32,9 @@
     <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
 
-    <!-- Google Fonts (Noto Sans Arabic) -->
+    <!-- Google Fonts -->
     <link
-        href="https://fonts.googleapis.com/css2?family=Noto+Sans+Arabic:wght@100;200;300;400;500;600;700;800;900&display=swap"
+        href="https://fonts.googleapis.com/css2?family=Noto+Sans+Arabic:wght@100;200;300;400;500;600;700;800;900&family=Unbounded:wght@200..900&display=swap"
         rel="stylesheet">
 
     <!-- Font Awesome -->
@@ -43,7 +43,6 @@
     <!-- AOS Animation -->
     <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
     <link rel="stylesheet" href="./css/style.css">
-</head>
 </head>
 
 <body class="loading">
@@ -114,7 +113,10 @@
         </div>
     </header>
 
-    <main>
+    <div id="smooth-wrapper">
+        <div id="smooth-content">
+            <div class="content-body-reveal">
+                <main>
         <section class="hero">
             <div class="hero-container-absolute">
                 <!-- QR Section -->
@@ -137,7 +139,7 @@
 
             <!-- Main Wrapper (Text + Watermark) -->
             <div class="hero-watermark-text"></div>
-            <div class="hero-main-wrapper">
+            <div class="hero-main-wrapper" data-lag="0.05">
                 <h1 class="hero-title reveal-title">Your store will be <br> ready in no more <br> than a minute.</h1>
             </div>
 
@@ -154,7 +156,7 @@
             </div>
 
             <!-- Laptop -->
-            <div class="laptop-visual-absolute translate-x-[-80px] translate-y-[-80px]">
+            <div class="laptop-visual-absolute translate-x-[-80px] translate-y-[-80px]" data-speed="1.15">
                 <img src="./assets/images/laptop.svg" alt="Laptop" class="laptop-img-hero">
             </div>
 
@@ -169,105 +171,94 @@
         </div>
     </section>
 
-    <section class="creative-steps overflow-hidden    bg-[#FAFAFA]/30">
-        <div class="max-w-[1440px] mx-auto px-[60px]   relative">
+    <section class="creative-steps">
+        <div class="creative-steps-container">
 
             <!-- Header Section -->
-            <div class="mb-20 text-center md:text-left w-full flex flex-col items-center md:items-start">
-                <div class="flex flex-col md:flex-row items-center gap-3 mb-4 justify-center md:justify-start">
+            <div class="mb-24 text-left w-full flex flex-col items-start px-5 relative z-50">
+                <div class="flex flex-row items-center gap-3 mb-6 justify-start">
                     <div class="flex items-center justify-center">
-                        <div class="w-12 h-[1px] bg-slate-400"></div>
+                        <div class="w-12 h-[1px] bg-slate-200"></div>
                         <div class="flex items-center -mx-1.5">
                             <div class="w-3.5 h-3.5 rounded-full bg-[#F5C99A] border border-[#E5A158]"></div>
                             <div class="w-3.5 h-3.5 rounded-full bg-white border border-slate-200 -ml-2"></div>
                         </div>
-                        <div class="w-12 h-[1px] bg-slate-400"></div>
+                        <div class="w-12 h-[1px] bg-slate-200"></div>
                     </div>
-                    <span class="text-[14px] font-medium text-slate-500 tracking-wide text-center md:text-left">Build a store</span>
+                    <span class="text-[14px] font-medium   tracking-widest uppercase">Build a store</span>
                 </div>
-                <h2 class="text-[22px] md:text-[32px] font-semibold text-[#1A1A1A] leading-tight reveal-title w-full text-center md:text-left">Our <br class="hidden md:block">Creative Steps
+                <h2 class="text-[45px] md:text-[50px] font-black leading-[0.85] uppercase reveal-title text-left click-animate-title" style="font-family: 'Unbounded', sans-serif; cursor: pointer;">
+                    <span class="block title-stroke mb-2">Our</span>
+                    <span class="block title-solid">Creative Steps </span> 
                 </h2>
             </div>
 
             <!-- Cards Grid Layout -->
-            <div class="relative min-h-[400px]">
-                <div class="grid grid-cols-1 md:grid-cols-4 gap-8 items-end">
+            <div class="relative">
+                <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-[25px] items-start">
 
                     <!-- Step 01 -->
-                    <div
-                        class="bg-white p-10 rounded-[30px] shadow-xl shadow-slate-200/40 h-[350px] flex flex-col justify-between hover:-translate-y-2 transition-all duration-300 step-reveal">
-                        <div class="flex justify-between items-start">
-                            <div class="w-[35px] h-[35px]">
-                                <img src="./assets/images/creative-icon1.svg" alt="Icon 1"
-                                    class="w-full h-full object-contain">
+                    <div class="flex flex-col">
+                        <div class="step-card step-reveal">
+                            <div class="flex justify-between items-start">
+                                <div class="w-[35px] h-[35px]">
+                                    <img src="./assets/images/creative-icon1.svg" alt="Icon 1" class="w-full h-full object-contain">
+                                </div>
+                                <span class="step-number-stroke">01</span>
                             </div>
-                            <span class="text-6xl font-black step-number-stroke">01</span>
+                            <p class="step-description">Select the package that matches your needs</p>
                         </div>
-                        <p class="text-[#475569] font-medium text-[15px] md:text-[16px] leading-relaxed">Select the package that matches
-                            your needs</p>
                     </div>
 
                     <!-- Step 02 -->
-                    <div
-                        class="bg-white p-10 rounded-[30px] shadow-xl shadow-slate-200/40 h-[350px] flex flex-col justify-between hover:-translate-y-2 transition-all duration-300 step-reveal">
-                        <div class="flex justify-between items-start">
-                            <div class="w-[35px] h-[35px]">
-                                <img src="./assets/images/creative-icon2.svg" alt="Icon 2"
-                                    class="w-full h-full object-contain">
+                    <div class="flex flex-col">
+                        <div class="step-card step-reveal">
+                            <div class="flex justify-between items-start">
+                                <div class="w-[35px] h-[35px]">
+                                    <img src="./assets/images/creative-icon2.svg" alt="Icon 2" class="w-full h-full object-contain">
+                                </div>
+                                <span class="step-number-stroke">02</span>
                             </div>
-                            <span class="text-6xl font-black step-number-stroke">02</span>
+                            <p class="step-description">Pick a design that is in line with your brand.</p>
                         </div>
-                        <p class="text-[#475569] font-medium text-[15px] md:text-[16px] leading-relaxed">Pick a design that is in line
-                            with your brand.</p>
                     </div>
 
-                    <!-- Step 03 (Elevated) -->
-                    <div
-                        class="bg-white p-10 rounded-[30px] shadow-xl shadow-slate-200/40 h-[350px] flex flex-col justify-between hover:-translate-y-2 transition-all duration-300 md:-translate-y-[200px] step-reveal">
-                        <div class="flex justify-between items-start">
-                            <div class="w-[35px] h-[35px]">
-                                <img src="./assets/images/creative-icon3.svg" alt="Icon 3"
-                                    class="w-full h-full object-contain">
+                    <!-- Step 03 & Circle -->
+                    <div class="flex flex-col md:-translate-y-[235px] gap-[25px]">
+                        <div class="step-card step-reveal">
+                            <div class="flex justify-between items-start">
+                                <div class="w-[35px] h-[35px]">
+                                    <img src="./assets/images/creative-icon3.svg" alt="Icon 3" class="w-full h-full object-contain">
+                                </div>
+                                <span class="step-number-stroke">03</span>
                             </div>
-                            <span class="text-6xl font-black step-number-stroke">03</span>
+                            <p class="step-description">Enter your store details and finalize the payment process.</p>
                         </div>
-                        <p class="text-[#475569] font-medium text-[15px] md:text-[16px] leading-relaxed">Enter your store details and
-                            finalize the payment process.</p>
+                        <div class="flex justify-start">
+                            <a href="https://wa.me/97450988700" target="_blank" class="cta-circle-wrapper step-reveal mt-0">
+                                <div class="cta-fill"></div>
+                                <span>Let's<br>Start<br>Now!</span>
+                            </a>
+                        </div>
                     </div>
 
                     <!-- Step 04 -->
-                    <div
-                        class="bg-white p-10 rounded-[30px] shadow-xl shadow-slate-200/40 h-[350px] flex flex-col justify-between hover:-translate-y-2 transition-all duration-300 step-reveal">
-                        <div class="flex justify-between items-start">
-                            <div class="w-[35px] h-[35px]">
-                                <img src="./assets/images/creative-icon4.svg" alt="Icon 4"
-                                    class="w-full h-full object-contain">
+                    <div class="flex flex-col">
+                        <div class="step-card step-reveal">
+                            <div class="flex justify-between items-start">
+                                <div class="w-[35px] h-[35px]">
+                                    <img src="./assets/images/creative-icon4.svg" alt="Icon 4" class="w-full h-full object-contain">
+                                </div>
+                                <span class="step-number-stroke">04</span>
                             </div>
-                            <span class="text-6xl font-black step-number-stroke">04</span>
+                            <p class="step-description">Now that your store is ready for sale, add your products</p>
                         </div>
-                        <p class="text-[#475569]  font-bold text-[15px] md:text-[16px] leading-relaxed">Now that your store is ready for
-                            sale, add your products</p>
                     </div>
-                </div>
-
-                <!-- CTA Circle (Positioned absolutely) -->
-                <div id="cta-circle"
-                    class="hidden md:flex absolute left-[62%] bottom-[0px] -translate-x-1/2 w-[180px] h-[180px] bg-white border border-[#316C6B] rounded-full flex-col items-center justify-center text-center p-6 shadow-xl z-20 transition-all cursor-pointer overflow-hidden"
-                    style="perspective: 1000px; transform-style: preserve-3d;">
-                    <!-- Pulse/Glow Effect Layer -->
-                    <div
-                        class="cta-glow-layer absolute inset-0 bg-[#F5C99A]/20 rounded-full scale-100 opacity-0 pointer-events-none">
-                    </div>
-                    <!-- Fill Layer (Radial fill from edges) -->
-                    <div class="cta-fill-layer absolute inset-0 pointer-events-none"
-                        style="background: radial-gradient(circle, transparent 100%, #F5C99A 100%);"></div>
-                    <span class="text-[#316C6B] font-black text-[22px] leading-tight transition-colors relative z-10"
-                        style="transform: translateZ(30px);">Let's<br>Start<br>Now!</span>
                 </div>
             </div>
 
             <!-- Bottom Section -->
-            <div class="w-full mt-20 md:mt-2 flex flex-col md:flex-row items-center md:items-end md:justify-end gap-12 md:gap-16 text-center md:text-left">
+            <div class="w-full  md:-mt-40 flex flex-col md:flex-row items-center mb-24   md:items-end md:justify-end gap-12 md:gap-16 text-center md:text-left relative z-10">
                 <!-- Badge Center/Left -->
                 <div id="moving-badge" class="relative flex items-center justify-center md:justify-start shrink-0">
                     <div class="w-72 relative">
@@ -295,11 +286,11 @@
         </div>
     </section>
 
-    <section class="different-section py-1 bg-white relative mb-40 overflow-hidden" id="different-section"
+    <section class="different-section py-1 bg-white relative mb-2 overflow-hidden" id="different-section"
         style="z-index: 1;">
         <div class="max-w-[1440px] mx-auto px-[60px] relative">
             <!-- Header Section -->
-            <div class="mb-16 text-center flex flex-col items-center">
+            <div class="different-header-wrapper mb-16 text-center flex flex-col items-center">
                 <div class="flex flex-col md:flex-row items-center gap-3 mb-4 justify-center md:justify-start">
                     <div class="flex items-center justify-center">
                         <div class="w-12 h-[1px] bg-slate-400"></div>
@@ -311,7 +302,10 @@
                     </div>
                     <span class="text-[14px] font-medium text-slate-500 tracking-wide text-center md:text-left">Our Services</span>
                 </div>
-                <h2 class="text-[22px] md:text-[32px] font-bold text-[#1A1A1A] leading-tight reveal-title mb-6">What Make Us Different?</h2>
+                <h2 class="text-[45px] md:text-[50px] font-black leading-[0.85] uppercase reveal-title text-left mb-6 click-animate-title" style="font-family: 'Unbounded', sans-serif; cursor: pointer;">
+                     <span class="block title-stroke mb-4">What Make</span>
+                     <span class="block title-solid">Us Different?</span>
+                 </h2>
                 <div class="w-full md:w-1/2 md:hidden">
                     <p class="text-[#64748B] text-[15px] md:text-[16px] leading-relaxed font-medium mx-auto">
                         We provide integrated solutions to help you launch your online store with ease, with continuous support and advanced technical tools.
@@ -325,7 +319,7 @@
                     <div class="stack-card-inner teal-bg">
                         <img src="./assets/images/support-1.svg" alt="Online Store" class="stack-card-img">
                         <div class="stack-card-content text-center md:text-left items-center md:items-start">
-                            <h3 class="text-[18px] md:text-[24px] font-medium leading-tight">Easy online store with your brand name</h3>
+                            <h3 class="text-[18px] md:text-[45px]  font-bold leading-tight max-w-[70%]">Easy online store with your brand name</h3>
                             <div class="flex flex-col md:flex-row items-center md:items-end justify-between mt-auto w-full">
                                 <span class="text-[120px] font-bold leading-none  ">01</span>
                                 <p class="text-[15px] md:text-[16px] leading-relaxed opacity-90 max-w-[400px] md:max-w-[340px] pb-6">Get your business name up and
@@ -340,7 +334,7 @@
                     <div class="stack-card-inner white-bg">
                         <img src="./assets/images/support-2.svg" alt="Support" class="stack-card-img">
                         <div class="stack-card-content text-center md:text-left items-center md:items-start">
-                            <h3 class="text-[18px] md:text-[24px] font-medium leading-tight">A dedicated account manager to support you
+                            <h3 class="text-[18px] md:text-[45px] font-medium leading-tight max-w-[90%]">A dedicated account manager to support you
                                 every step of the way.</h3>
                             <div class="flex flex-col md:flex-row items-center md:items-end justify-between mt-auto w-full">
                                 <span
@@ -360,7 +354,7 @@
                     <div class="stack-card-inner teal-bg">
                         <img src="./assets/images/support-3.svg" alt="Control Panel" class="stack-card-img">
                         <div class="stack-card-content text-center md:text-left items-center md:items-start">
-                            <h3 class="text-[18px] md:text-[24px] font-medium leading-tight">Easy control panel with free training.</h3>
+                            <h3 class="text-[18px] md:text-[40px] font-medium leading-tight max-w-[70%]">Easy control panel with free training.</h3>
                             <div class="flex flex-col md:flex-row items-center md:items-end justify-between mt-auto w-full">
                                 <span class="text-[120px] font-bold leading-none  ">03</span>
                                 <p class="text-[15px] md:text-[16px] leading-relaxed opacity-90 max-w-[400px] md:max-w-[340px] pb-6">The subscription comes with free
@@ -375,7 +369,7 @@
                     <div class="stack-card-inner white-bg">
                         <img src="./assets/images/support-4.svg" alt="Integration" class="stack-card-img">
                         <div class="stack-card-content text-center md:text-left items-center md:items-start">
-                            <h3 class="text-[18px] md:text-[24px] font-medium leading-tight">Instant integration with payment and
+                            <h3 class="text-[18px] md:text-[45px] font-medium leading-tight max-w-[80%]">Instant integration with payment and
                                 delivery gateways</h3>
                             <div class="flex flex-col md:flex-row items-center md:items-end justify-between mt-auto w-full">
                                 <span class="text-[120px] font-bold leading-none stack-number-stroke">04</span>
@@ -391,7 +385,7 @@
                     <div class="stack-card-inner teal-bg">
                         <img src="./assets/images/support-5.svg" alt="Reports" class="stack-card-img">
                         <div class="stack-card-content text-center md:text-left items-center md:items-start">
-                            <h3 class="text-[18px] md:text-[24px] font-medium leading-tight">Financial reports and performance analysis
+                            <h3 class="text-[18px] md:text-[45px]  max-w-[70%] font-medium leading-tight">Financial reports and performance analysis
                             </h3>
                             <div class="flex flex-col md:flex-row items-center md:items-end justify-between mt-auto w-full">
                                 <span class="text-[120px] font-bold leading-none ">05</span>
@@ -415,7 +409,7 @@
             <img src="./assets/images/support-watermark2.svg" alt="Trolley Orange" class="graphic-cart-service orange">
         </div>
 
-        <div class="max-w-[1440px] mx-auto px-[60px] relative z-10">
+        <div class="services-content-container px-[60px] relative z-10">
             <div class="flex flex-col md:flex-row items-center justify-between mb-10 text-white gap-6 md:gap-10 text-center md:text-left">
                 <!-- Left: Title and Badge -->
                 <div class="flex flex-col md:items-start items-center">
@@ -435,14 +429,14 @@
 
                 <!-- Center: Description (50% width) -->
                 <div class="w-full md:w-1/2 reveal-up">
-                    <p class="text-white text-[15px] md:text-[16px] leading-relaxed mx-auto md:mx-0">
+                    <p class="text-white text-[17px] leading-relaxed mx-auto md:mx-0">
                         Our support services are available in this section to help you integrate the work of your store
                         and find everything you need in one place.
                     </p>
                 </div>
 
                 <!-- Right: Pagination -->
-                <div id="service-pagination" class="text-[28px] md:text-[35px] font-semibold text-white">
+                <div id="service-pagination" class="text-[28px] md:text-[35px] font-semibold text-white" style="transform: translate(-56px, 0px);">
                     1/8
                 </div>
             </div>
@@ -839,6 +833,10 @@
     </section>
 
     </main>
+            </div>
+            <div class="footer-reveal-spacer"></div>
+        </div>
+    </div>
 
     <footer>
         <div class="max-w-[1440px] mx-auto px-[60px]">
@@ -911,14 +909,19 @@
             </div>
         </div>
     </footer>
+
+    <!-- Scroll to Top Button -->
+    <button id="scroll-to-top" class="scroll-to-top" aria-label="Scroll to top">
+        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="m18 15-6-6-6 6"/>
+        </svg>
+    </button>
+
     <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
     <!-- GSAP & ScrollTrigger -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
-
-    <!-- Lenis Smooth Scroll (The best free alternative to ScrollSmoother) -->
-    <script src="https://unpkg.com/lenis@1.1.13/dist/lenis.min.js"></script>
-    <link rel="stylesheet" href="https://unpkg.com/lenis@1.1.13/dist/lenis.css">
+    <script src="https://assets.codepen.io/16327/ScrollSmoother.min.js"></script>
 
     <script src="./js/script.js"></script>
 </body>

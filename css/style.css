@@ -6,12 +6,122 @@
     box-sizing: border-box;
 }
 
+/* --- Custom Text Selection --- */
+::selection {
+    background-color: #1A1A1A; /* لون داكن جداً للموقع بشكل عام */
+    color: #F5C99A; /* لون النص الذهبي */
+}
+
+::-moz-selection {
+    background-color: #1A1A1A;
+    color: #F5C99A;
+}
+
+/* تخصيص التحديد للعناوين التفاعلية (حرف بحرف) */
+.click-animate-title ::selection {
+    background-color: transparent; /* إزالة خلفية التحديد لجعل الحرف يبرز وحده */
+    color: #F5C99A !important; /* تغيير لون الحرف للذهبي عند محاولة تحديده */
+    text-shadow: 0 0 15px rgba(245, 201, 154, 0.6); /* إضافة توهج بسيط حول الحرف المختار */
+}
+
+.click-animate-title ::-moz-selection {
+    background-color: transparent;
+    color: #F5C99A !important;
+    text-shadow: 0 0 15px rgba(245, 201, 154, 0.6);
+}
+
+html {
+    scroll-behavior: smooth !important;
+}
+
+/* --- Scroll to Top Button --- */
+.scroll-to-top {
+    position: fixed;
+    bottom: 30px;
+    right: 30px;
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    background-color: #316C6B;
+    color: white;
+    border: none;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 1000;
+    opacity: 0;
+    visibility: hidden;
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+.scroll-to-top.show {
+    opacity: 1;
+    visibility: visible;
+}
+
+.scroll-to-top:hover {
+    background-color: #265554;
+    transform: scale(1.1);
+    box-shadow: 0 6px 16px rgba(0, 0, 0, 0.2);
+}
+
+.scroll-to-top svg {
+    transition: transform 0.3s ease;
+}
+
+.scroll-to-top:hover svg {
+    transform: translateY(-2px);
+}
+
+/* --- ScrollSmoother Setup --- */
+#smooth-wrapper {
+    overflow: hidden;
+    position: fixed;
+    height: 100%;
+    width: 100%;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: 10;
+    background-color: transparent;
+    pointer-events: none; /* يسمح بمرور النقرات للفوتر في الأسفل */
+}
+
+#smooth-content {
+    overflow: visible;
+    width: 100%;
+    background-color: transparent;
+    padding-top: 100px;
+    pointer-events: none; /* يسمح بمرور النقرات */
+}
+
+.content-body-reveal {
+    background-color: white;
+    position: relative;
+    z-index: 20;
+    box-shadow: 0 50px 100px rgba(0,0,0,0.1);
+    pointer-events: auto; /* يعيد تفعيل النقرات للمحتوى الأساسي فقط */
+}
+
+.footer-reveal-spacer {
+    height: 0;
+    background-color: transparent;
+    pointer-events: none; /* يضمن بقاء الفراغ قابلاً للنقر من خلاله */
+}
+
+html, body {
+    margin: 0;
+    padding: 0;
+    height: 100%;
+    -webkit-font-smoothing: antialiased;
+}
+
 body {
     font-family: 'Noto Sans Arabic', sans-serif;
     background-color: #FFFFFF;
-    margin: 0;
-    padding: 0;
-    padding-top: 100px;
     overflow-x: hidden;
     position: relative;
 }
@@ -33,6 +143,90 @@ body::before {
 h2 {
     font-weight: 500;
     line-height: 1.2;
+}
+
+/* --- Heading Decorations --- */
+.title-stroke {
+    color: #FFFFFF;
+    text-shadow: 
+        1px 1px 0 #1A1A1A,
+        -1px -1px 0 #1A1A1A,  
+        1px -1px 0 #1A1A1A,
+        -1px 1px 0 #1A1A1A,
+        0px 1px 0 #1A1A1A,
+        0px -1px 0 #1A1A1A,
+        1px 0px 0 #1A1A1A,
+        -1px 0px 0 #1A1A1A;
+    font-variant-ligatures: none;
+    font-feature-settings: "liga" 0, "ss01" 0, "ss02" 0, "ss03" 0, "ss04" 0, "salt" 0;
+    -webkit-font-smoothing: antialiased;
+    font-weight: 800; /* تجنب الوزن الأقصى الذي قد يحتوي على أشكال مشوهة */
+    letter-spacing: normal;
+}
+
+.title-solid {
+    color: #1A1A1A; /* أسود بشكل افتراضي */
+    font-variant-ligatures: none;
+    font-feature-settings: "liga" 0, "ss01" 0, "ss02" 0, "ss03" 0, "ss04" 0, "salt" 0;
+    -webkit-font-smoothing: antialiased;
+    font-weight: 800;
+    letter-spacing: normal;
+}
+
+/* --- Heading Decorations & Hover Effects --- */
+.click-animate-title {
+    cursor: pointer;
+    display: block; /* تغيير لـ block لضمان تغطية المساحة بالكامل */
+    width: fit-content;
+    position: relative;
+    z-index: 10;
+}
+
+/* الحالة الأصلية للنص المصمت (أسود صريح قبل الهوفر) */
+.click-animate-title .title-solid, 
+.click-animate-title .title-solid span {
+    color: #1A1A1A !important;
+    transition: all 0.4s ease-in-out !important;
+    font-weight: 600 !important; /* وزن 600 يضمن شكلاً نظيفاً جداً لحرف R */
+    font-variant-ligatures: none !important;
+    font-feature-settings: "liga" 0, "dlig" 0, "ss01" 0, "ss02" 0, "ss03" 0, "ss04" 0, "ss05" 0, "ss06" 0, "ss07" 0, "ss08" 0, "ss09" 0, "ss10" 0 !important;
+}
+
+/* الحالة الأصلية للنص المفرغ (أبيض بحدود سوداء) */
+.click-animate-title .title-stroke,
+.click-animate-title .title-stroke span {
+    color: #FFFFFF !important;
+    /* -webkit-text-stroke: 1px #1A1A1A !important; */
+    transition: all 0.4s ease-in-out !important;
+    font-weight: 600 !important; /* وزن 600 هو الأفضل لمنع التداخلات الداخلية في حرف R */
+    font-variant-ligatures: none !important;
+    font-feature-settings: "liga" 0, "dlig" 0, "ss01" 0, "ss02" 0, "ss03" 0, "ss04" 0, "ss05" 0, "ss06" 0, "ss07" 0, "ss08" 0, "ss09" 0, "ss10" 0 !important;
+}
+
+/* --- التأثير عند الهوفر (يعمل على العنوان بالكامل) --- */
+
+/* النص المصمت يتحول بالكامل للون التيل */
+.click-animate-title:hover .title-solid,
+.click-animate-title:hover .title-solid span {
+    color: #316C6B !important;
+}
+
+/* النص المفرغ يتحول بالكامل للون الذهبي ويمتلئ */
+.click-animate-title:hover .title-stroke,
+.click-animate-title:hover .title-stroke span {
+    color: #F5C99A !important;
+    -webkit-text-stroke: 0px transparent !important;
+}
+
+/* حركة بسيطة لكل حرف عند الهوفر المباشر عليه (اختياري للجمالية) */
+.click-animate-title span span:hover {
+    transform: translateY(-5px);
+}
+
+/* حالة النقر للحروف */
+.click-animate-title span span.active-char {
+    color: #F5C99A !important;
+    transform: scale(1.4) translateY(-10px);
 }
 
 /* --- Header --- */
@@ -496,26 +690,116 @@ header {
 
 /* --- Creative Steps --- */
 .creative-steps {
-    padding: 100px 0;
-    background: radial-gradient(circle at 50% 50%, rgba(49, 108, 107, 0.03) 0%, rgba(255, 255, 255, 0) 70%);
+    padding-top: 120px;
+    padding-bottom: 0; /* No padding at bottom */
+    padding-left: 20px;
+    padding-right: 20px;
+    background: #FAFAFA;
+    position: relative;
+    overflow: hidden;
+    width: 100%;
+}
+
+.creative-steps-container {
+    width: 100%;
+    margin: 0 auto;
     position: relative;
 }
 
+.step-card {
+    background: #FFFFFF;
+    border-radius: 20px;
+    padding: 12%;
+    min-height: 365px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+    position: relative;
+    border: 1px solid rgba(0, 0, 0, 0.05);
+    box-shadow: 0 20px 50px rgba(0, 0, 0, 0.05);
+}
+
+.step-card:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 30px 60px rgba(0, 0, 0, 0.1);
+}
+
 .step-number-stroke {
-    -webkit-text-stroke: 1.5px #9AB5AD;
+    -webkit-text-stroke: 2px #316C6B;
     color: transparent;
+    font-size: 45px;
+    font-weight: 600;
+    line-height: 1;
     font-family: sans-serif;
+    opacity: 0.2;
 }
 
-.stack-number-stroke {
-    -webkit-text-stroke: 2px #E2E8F0;
-    color: transparent;
-    font-family: sans-serif;
+.step-description {
+    color: #475569;
+    font-size: 24px;
+    font-weight: 600;
+    line-height: 1.6;
+    text-align: left;
 }
 
-.teal-shape-bg {
-    background: #316C6B;
-    clip-path: polygon(0% 0%, 100% 0%, 90% 100%, 10% 100%);
+.cta-circle-wrapper {
+    width: 175px;
+    height: 175px;
+    border: 1px solid #316C6B;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 25px auto 0;
+    cursor: pointer;
+    text-decoration: none;
+    background: #FFFFFF;
+    position: relative;
+    overflow: hidden;
+    z-index: 100;
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+}
+
+/* طبقة التعبئة الخضراء */
+.cta-fill {
+    position: absolute;
+    width: 250%; /* حجم كبير جداً */
+    height: 250%;
+    background-color: #316C6B !important;
+    border-radius: 50%;
+    pointer-events: none;
+    z-index: 1;
+    transform: translate(-50%, -50%) scale(0);
+    top: 0;
+    left: 0;
+    display: block !important;
+    visibility: visible !important;
+}
+
+.cta-circle-wrapper span {
+    color: #316C6B !important;
+    font-size: 22px;
+    font-weight: 800;
+    text-transform: none;
+    text-align: center;
+    line-height: 1.1;
+    z-index: 10 !important; /* فوق التعبئة دائماً */
+    pointer-events: none;
+    display: block;
+    position: relative;
+    transition: color 0.2s ease;
+}
+
+/* ضمان تحول النص للأبيض فوراً عند الهوفر في الـ CSS كاحتياط */
+.cta-circle-wrapper:hover span {
+    color: #FFFFFF !important;
+}
+
+/* Optional: Magnetic effect class if needed for JS */
+.magnetic-wrap {
+    display: inline-block;
+    transition: transform 0.3s cubic-bezier(0.23, 1, 0.32, 1);
 }
 
 /* --- What Makes Us Different --- */
@@ -586,27 +870,33 @@ header {
 
 .service-card {
     background: #FFFFFF;
-    border-radius: 20px;
+    border-radius: .3472222222vw !important;
     overflow: hidden;
-    height: 100%;
+    width: 25vw !important;
+    height: 34.7222222222vw !important;
     display: flex;
     flex-direction: column;
-    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.08);
-    transition: all 0.3s ease;
+    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.05);
+    transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1); /* انتقال أنعم واحترافي */
+    pointer-events: auto !important;
+    border: 1px solid transparent;
 }
 
 .service-card:hover {
-    transform: translateY(-10px);
-    box-shadow: 0 20px 45px rgba(0, 0, 0, 0.12);
+    transform: translateY(-15px) scale(1.02); /* رفع البطاقة مع تكبير بسيط */
+    box-shadow: 0 30px 60px rgba(49, 108, 107, 0.15); /* توهج بلون التيل الفخم */
+    border-radius: 2vw !important;
+    border-color: rgba(49, 108, 107, 0.1);
 }
 
 .service-img-wrapper {
-    height: 220px;
+    height: 18vw; 
     width: 100%;
     background: #f8fafc;
     display: flex;
     align-items: center;
     justify-content: center;
+    overflow: hidden; /* لضمان عدم خروج الصورة عند التكبير */
 }
 
 .service-img {
@@ -616,10 +906,15 @@ header {
     pointer-events: none;
     user-select: none;
     -webkit-user-drag: none;
+    transition: transform 0.8s cubic-bezier(0.4, 0, 0.2, 1); /* أنميشن للصورة */
+}
+
+.service-card:hover .service-img {
+    transform: scale(1.1); /* تكبير الصورة داخل البطاقة عند الهوفر */
 }
 
 .service-content {
-    padding: 25px;
+    padding: 1.7vw;
     flex: 1;
     display: flex;
     flex-direction: column;
@@ -627,28 +922,31 @@ header {
 }
 
 .service-title {
-    font-weight: 700;
+    font-weight: 700 !important;
     color: #1A1A1A;
-    margin-bottom: 12px;
+    margin-bottom: 0.8vw;
+    font-size: 22px !important;
 }
 
 .service-desc {
     color: #555555;
     line-height: 1.6;
-    margin-bottom: 25px;
+    margin-bottom: 1.5vw;
     flex: 1;
-    font-weight: 600;
+    font-weight: 500;
+    font-size: 1.1vw;
 }
 
 .btn-learn-more {
-    width: 100%;
-    height: 45px;
+    width: 20.8333333333vw !important;
+    min-width: 20.8333333333vw !important;
+    height: 4.1666666667vw !important;
     background: #316C6B;
     color: #FFFFFF;
     border: none;
-    border-radius: 10px;
+    border-radius: 3.125vw; /* تم تعديل انحناء الزوايا كما طلبت */
     font-weight: 600;
-    font-size: 12px;
+    font-size: .9722222222vw;
     cursor: pointer;
     transition: background 0.3s, color 0.3s, transform 0.3s;
     position: relative;
@@ -656,6 +954,13 @@ header {
     display: flex;
     align-items: center;
     justify-content: center;
+    margin-top: auto; 
+}
+
+/* إلغاء تأثير التبادل في الارتفاع */
+.service-card:nth-child(even),
+.service-card:nth-child(odd) {
+    transform: translateY(0);
 }
 
 .btn-marquee-wrapper {
@@ -672,22 +977,27 @@ header {
     font-weight: 600;
 }
 
-.service-card {
-    width: 25vw !important;
-    height: 34.7222222222vw !important;
-    pointer-events: auto !important;
-    border-radius: 0px;
-    transition: border-color 0.4s ease, border-radius 0.4s ease;
-    overflow: hidden;
-    background: white;
+/* تم دمج تنسيقات الهيدر ضمن الفليكس في HTML لتطابق الصورة بدقة */
+
+/* ضبط المسافات والمحاذاة للقسم ليبدأ من حافة الصفحة */
+.services-content-container {
+    padding-left: 0 !important;
+    padding-right: 0 !important;
+    width: 100%;
 }
 
-.service-card:hover {
-    border-color: #316C6B;
-    border-radius: 40px;
+.services-content-container > div:first-child {
+    padding-left: 60px; /* الحفاظ على مسافة العنوان فقط وليس البطاقات */
 }
 
 #services-slider {
+    padding-top: 20px; 
+    padding-bottom: 50px; 
+    display: flex;
+    gap: 39.225px; /* جعل المسافة بين البطاقات مساوية للمسافة من حافة الصفحة (60px - 20.775px) */
+    padding-left: 60px; 
+    transform: translate3d(-20.775px, 0px, 0px); 
+}
     pointer-events: auto !important;
     touch-action: pan-y;
     user-select: none;
@@ -793,10 +1103,11 @@ header {
 /* Stacking Cards Styles */
 .stacking-cards-container {
     position: relative;
-    width: 100%;
-    height: 630px;
-    margin-top: 2px;
+    width: 100vw;
+    height: 725px;
+    margin-top: 30px;
     overflow: visible;
+    margin-left: calc(-50vw + 50%); /* Start from the very left edge of the viewport */
 }
 
 .stack-card {
@@ -809,26 +1120,42 @@ header {
     align-items: center;
     justify-content: center;
     will-change: transform;
+    padding: 0 20px; /* 20px gap from left and right edges */
+}
+.stack-card h3 {
+     font-weight: 700;
 }
 
 .stack-card-inner {
-    background: white;
+    background: transparent;
     border-radius: 40px;
     overflow: hidden;
     display: grid;
-    grid-template-columns: 1fr 1fr;
-    height: 100%;
-    width: 100%;
+    grid-template-columns: 1fr 1fr; /* 50% for each card */
+    gap: 20px; /* 20px gap between the image and content cards */
+    width: 100%; /* Fill the container width (minus stack-card padding) */
+    max-width: none;
+    height: 725px;
 }
 
 .stack-card-inner.teal-bg {
-    background: #316C6B;
     color: white;
 }
 
+.stack-card-inner.teal-bg .stack-card-img,
+.stack-card-inner.teal-bg .stack-card-content {
+    background: #316C6B;
+    border-radius: 40px;
+}
+
 .stack-card-inner.white-bg {
-    background: white;
     color: #1A1A1A;
+}
+
+.stack-card-inner.white-bg .stack-card-img,
+.stack-card-inner.white-bg .stack-card-content {
+    background: white;
+    border-radius: 40px;
     border: 1px solid #f1f5f9;
 }
 
@@ -843,15 +1170,32 @@ header {
     display: flex;
     flex-direction: column;
     justify-content: space-between;
+    width: 100%;
+    height: 100%;
+}
+
+.stack-number-stroke {
+    -webkit-text-stroke: 1px #316C6B;
+    color: transparent;
+    opacity: 0.2;
 }
 
 @media (max-width: 992px) {
     .stack-card-inner {
         grid-template-columns: 1fr;
+        width: 100%;
+        height: auto;
     }
 
     .stack-card-img {
-        height: 200px;
+        width: 100%;
+        height: 300px;
+    }
+
+    .stack-card-content {
+        width: 100%;
+        height: auto;
+        padding: 30px 20px;
     }
 
     .stack-card {
@@ -864,10 +1208,6 @@ header {
         height: auto;
         display: flex;
         flex-direction: column;
-    }
-
-    .stack-card-content {
-        padding: 30px 20px;
     }
 }
 
@@ -1046,10 +1386,9 @@ header {
     padding: 120px 0;
     background: #FFFFFF;
     position: relative;
-    overflow: hidden;
-    z-index: 2;
+    overflow: visible;
+    z-index: 10; /* أعلى من الفوتر لتغطيته */
     box-shadow: 0 50px 100px rgba(0, 0, 0, 0.1);
-    margin-bottom: 500px;
 }
 
 .support-banner-container {
@@ -1249,11 +1588,11 @@ footer {
     padding: 100px 0 40px;
     background: #FFFFFF;
     border-top: 1px solid #F1F5F9;
-    position: fixed;
+    position: fixed; /* تثبيت الفوتر في الخلفية */
     bottom: 0;
     left: 0;
     width: 100%;
-    z-index: 1;
+    z-index: 15; /* أعلى من الـ wrapper (10) وأقل من المحتوى (20) لتمكين التفاعل */
     will-change: transform;
 }
 
@@ -1372,7 +1711,7 @@ footer {
     text-transform: capitalize;
     border: none;
     cursor: pointer;
-    box-shadow: 0 20px 40px rgba(49, 108, 107, 0.3);
+    box-shadow: 0 4px 15px rgba(49, 108, 107, 0.25);
     transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
     letter-spacing: 0.5px;
     position: relative;
@@ -1396,15 +1735,16 @@ footer {
 }
 
 .footer-main-btn:hover {
-    transform: translateY(-5px) scale(1.01);
-    box-shadow: 0 25px 50px rgba(49, 108, 107, 0.4);
-    background: #316C6B;
-    color: white;
+    background: #316C6B !important;
+    color: #FFFFFF !important;
+    transform: translateY(-2px) scale(1.05) !important;
+    box-shadow: 0 10px 25px rgba(49, 108, 107, 0.3) !important;
+    cursor: pointer !important;
 }
 
 .footer-main-btn:hover::after {
-    left: 150%;
-    transition: all 0.8s ease;
+    left: 150% !important;
+    transition: all 0.6s ease !important;
 }
 
 .bottom-bar {
