@@ -24,8 +24,8 @@ gsap.registerPlugin(ScrollTrigger, ScrollSmoother);
 let smoother = ScrollSmoother.create({
     wrapper: "#smooth-wrapper",
     content: "#smooth-content",
-    smooth: 2, // مدة التمرير السلس لجعل الحركة فخمة وانسيابية جداً
-    effects: true, // تفعيل تأثيرات Parallax و Speed
+    smooth: 1.5, // Reduced from 2 for better performance
+    effects: true, 
     smoothTouch: 0.1, 
 });
 
@@ -44,51 +44,56 @@ if (typeof AOS !== 'undefined') {
 }
 
 // --- Page Loader ---
-window.addEventListener('load', function () {
+const initLoader = () => {
     const loader = document.getElementById('loader-wrapper');
     const body = document.body;
 
-    // إيقاف السكرول أثناء التحميل
-    smoother.paused(true);
-
-    if (loader) {
+    if (loader && !loader.classList.contains('hidden')) {
         const tl = gsap.timeline();
 
         tl.to(".loader-container", {
             scale: 0.8,
             opacity: 0,
-            duration: 0.5,
+            duration: 0.4,
             ease: "power2.inOut"
         })
             .to(".loader-status-text", {
                 y: 20,
                 opacity: 0,
-                duration: 0.3
-            }, "-=0.3")
+                duration: 0.2
+            }, "-=0.2")
             .to(loader, {
                 yPercent: -100,
-                duration: 0.8,
+                duration: 0.6,
                 ease: "power4.inOut"
             })
-            .set(loader, { visibility: 'hidden' })
+            .set(loader, { visibility: 'hidden', className: "+=hidden" })
             .call(() => {
                 body.classList.remove('loading');
-                // تشغيل السكرول بعد انتهاء التحميل
-                smoother.paused(false);
-                // تحديث الحسابات لضمان ظهور كل العناصر
+                if (typeof smoother !== 'undefined') smoother.paused(false);
                 ScrollTrigger.refresh();
             });
     }
+};
+
+// Start loader exit as soon as possible, but ensure GSAP is loaded
+window.addEventListener('DOMContentLoaded', () => {
+    // We wait a bit to ensure animations are smooth
+    setTimeout(initLoader, 1000); 
 });
+
+// Fallback for safety
+window.addEventListener('load', initLoader);
 
 setTimeout(() => {
     const loader = document.getElementById('loader-wrapper');
     const body = document.body;
-    if (loader && loader.style.visibility !== 'hidden') {
+    if (loader && !loader.classList.contains('hidden')) {
         gsap.to(loader, { opacity: 0, visibility: 'hidden', duration: 0.5 });
         body.classList.remove('loading');
+        loader.classList.add('hidden');
     }
-}, 4000);
+}, 3000); // Reduced from 4000
 
 // --- Stacking Cards ---
 const cards = gsap.utils.toArray('.stack-card');

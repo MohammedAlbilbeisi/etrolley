@@ -26,6 +26,17 @@
 
     <title>E-trolley | Create Your Professional Online Store in Minutes</title>
 
+    <!-- Preconnect to external domains -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="preconnect" href="https://cdnjs.cloudflare.com">
+    <link rel="preconnect" href="https://unpkg.com">
+
+    <!-- Preload Critical Assets -->
+    <link rel="preload" href="./assets/images/logo.svg" as="image">
+    <link rel="preload" href="./assets/images/laptop.svg" as="image" fetchpriority="high">
+    <link rel="preload" href="https://fonts.googleapis.com/css2?family=Noto+Sans+Arabic:wght@400;700&family=Unbounded:wght@700;800&display=swap" as="style">
+
     <!-- Favicon -->
     <link rel="icon" type="image/svg+xml" href="./assets/images/footer-logo.svg">
 
@@ -35,13 +46,16 @@
     <!-- Google Fonts -->
     <link
         href="https://fonts.googleapis.com/css2?family=Noto+Sans+Arabic:wght@100;200;300;400;500;600;700;800;900&family=Unbounded:wght@200..900&display=swap"
-        rel="stylesheet">
+        rel="stylesheet" media="print" onload="this.media='all'">
+    <noscript>
+        <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Arabic:wght@100;200;300;400;500;600;700;800;900&family=Unbounded:wght@200..900&display=swap" rel="stylesheet">
+    </noscript>
 
     <!-- Font Awesome -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css" media="print" onload="this.media='all'">
 
     <!-- AOS Animation -->
-    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet" media="print" onload="this.media='all'">
     <link rel="stylesheet" href="./css/style.css">
 </head>
 
@@ -57,7 +71,7 @@
             <div class="loader-ring loader-ring-outer"></div>
             <div class="loader-ring loader-ring-inner"></div>
             <div class="loader-logo-inner">
-                <img src="./assets/images/logo.svg" alt="E-Trolley">
+                <img src="./assets/images/logo.svg" alt="E-Trolley" width="80" height="80">
             </div>
         </div>
         <div class="loader-status-text">Your Store is Ready...</div>
@@ -66,7 +80,7 @@
     <header>
         <div class="header-content">
             <div class="nav-logo-container">
-                <img src="./assets/images/logo.svg" alt="E-Trolley - Premium E-commerce Platform" class="nav-logo-img">
+                <img src="./assets/images/logo.svg" alt="E-Trolley - Premium E-commerce Platform" class="nav-logo-img" width="120" height="40">
             </div>
             <nav class="nav-links">
                 <a href="#" class="nav-item active">Home</a>
@@ -79,7 +93,7 @@
             <div class="header-actions">
                 <div class="phone-section">
                     <div class="phone-icon-wrapper" style="background: #F5C99A30;">
-                        <img src="./assets/images/phone-icon.svg" alt="Contact Support Phone Icon" class="phone-icon-img">
+                        <img src="./assets/images/phone-icon.svg" alt="Contact Support Phone Icon" class="phone-icon-img" width="40" height="40">
                     </div>
                     <div class="phone-info">
                         <span class="phone-label">Call us at:</span>
@@ -96,7 +110,7 @@
         <!-- Mobile Navigation Menu -->
         <div id="mobile-nav" class="mobile-nav">
             <div class="mobile-nav-header">
-                <img src="./assets/images/logo.svg" alt="Logo" class="h-8">
+                <img src="./assets/images/logo.svg" alt="Logo" class="h-8" width="100" height="32">
                 <button id="close-menu" class="close-menu"><i class="fas fa-times"></i></button>
             </div>
             <div class="mobile-nav-links">
@@ -122,13 +136,13 @@
                 <!-- QR Section -->
                 <div class="qr-section-absolute">
                     <div class="qr-card-img">
-                        <img src="./assets/images/qr-code.svg" alt="E-trolley Official QR Code" class="w-full h-auto">
+                        <img src="./assets/images/qr-code.svg" alt="E-trolley Official QR Code" class="w-full h-auto" width="260" height="260">
 
                     </div>
                     <div class="flex items-center gap-3 mt-[70px]">
                         <div class="validation-icon-wrapper flex shrink-0 items-center justify-center">
                             <img src="./assets/images/grommet-icons.svg" alt="Ministry of Communications Validation"
-                                class="w-full h-full object-contain" style="color: #316C6B;">
+                                class="w-full h-full object-contain" style="color: #316C6B;" width="20" height="20">
                         </div>
                         <p class="validation-text-p">
                             etrolley is a platform that has been officially validated by the Qatari Ministry of
@@ -157,7 +171,7 @@
 
             <!-- Laptop -->
             <div class="laptop-visual-absolute translate-x-[-80px] translate-y-[-80px]" data-speed="1.15">
-                <img src="./assets/images/laptop.svg" alt="Laptop" class="laptop-img-hero">
+                <img src="./assets/images/laptop.svg" alt="Laptop" class="laptop-img-hero" width="450" height="300" fetchpriority="high">
             </div>
 
             <!-- Build Button & Arrows -->
@@ -202,7 +216,7 @@
                         <div class="step-card step-reveal">
                             <div class="flex justify-between items-start">
                                 <div class="w-[35px] h-[35px]">
-                                    <img src="./assets/images/creative-icon1.svg" alt="Icon 1" class="w-full h-full object-contain">
+                                    <img src="./assets/images/creative-icon1.svg" alt="Icon 1" class="w-full h-full object-contain" width="35" height="35" loading="lazy">
                                 </div>
                                 <span class="step-number-stroke">01</span>
                             </div>
@@ -215,7 +229,7 @@
                         <div class="step-card step-reveal">
                             <div class="flex justify-between items-start">
                                 <div class="w-[35px] h-[35px]">
-                                    <img src="./assets/images/creative-icon2.svg" alt="Icon 2" class="w-full h-full object-contain">
+                                    <img src="./assets/images/creative-icon2.svg" alt="Icon 2" class="w-full h-full object-contain" width="35" height="35" loading="lazy">
                                 </div>
                                 <span class="step-number-stroke">02</span>
                             </div>
@@ -228,7 +242,7 @@
                         <div class="step-card step-reveal">
                             <div class="flex justify-between items-start">
                                 <div class="w-[35px] h-[35px]">
-                                    <img src="./assets/images/creative-icon3.svg" alt="Icon 3" class="w-full h-full object-contain">
+                                    <img src="./assets/images/creative-icon3.svg" alt="Icon 3" class="w-full h-full object-contain" width="35" height="35" loading="lazy">
                                 </div>
                                 <span class="step-number-stroke">03</span>
                             </div>
@@ -247,7 +261,7 @@
                         <div class="step-card step-reveal">
                             <div class="flex justify-between items-start">
                                 <div class="w-[35px] h-[35px]">
-                                    <img src="./assets/images/creative-icon4.svg" alt="Icon 4" class="w-full h-full object-contain">
+                                    <img src="./assets/images/creative-icon4.svg" alt="Icon 4" class="w-full h-full object-contain" width="35" height="35" loading="lazy">
                                 </div>
                                 <span class="step-number-stroke">04</span>
                             </div>
@@ -263,7 +277,7 @@
                 <div id="moving-badge" class="relative flex items-center justify-center md:justify-start shrink-0">
                     <div class="w-72 relative">
                         <img src="./assets/images/creative.svg" alt="Brush"
-                            class="w-full h-auto opacity-90 transform rotate-[-2deg]">
+                            class="w-full h-auto opacity-90 transform rotate-[-2deg]" width="288" height="150" loading="lazy">
                         <div class="absolute inset-0 flex items-center justify-center">
                             <div class="bg-white shadow-xl rounded-full py-3 px-8 border border-slate-50">
                                 <span class="text-[15px] font-semibold text-[#475569] italic">No technical skills
@@ -317,7 +331,7 @@
                 <!-- Card 01 -->
                 <div class="stack-card" style="z-index: 1;">
                     <div class="stack-card-inner teal-bg">
-                        <img src="./assets/images/support-1.svg" alt="Online Store" class="stack-card-img">
+                        <img src="./assets/images/support-1.svg" alt="Online Store" class="stack-card-img" width="300" height="200" loading="lazy">
                         <div class="stack-card-content text-center md:text-left items-center md:items-start">
                             <h3 class="text-[18px] md:text-[45px]  font-bold leading-tight max-w-[70%]">Easy online store with your brand name</h3>
                             <div class="flex flex-col md:flex-row items-center md:items-end justify-between mt-auto w-full">
@@ -332,7 +346,7 @@
                 <!-- Card 02 -->
                 <div class="stack-card" style="z-index: 2;">
                     <div class="stack-card-inner white-bg">
-                        <img src="./assets/images/support-2.svg" alt="Support" class="stack-card-img">
+                        <img src="./assets/images/support-2.svg" alt="Support" class="stack-card-img" width="300" height="200" loading="lazy">
                         <div class="stack-card-content text-center md:text-left items-center md:items-start">
                             <h3 class="text-[18px] md:text-[45px] font-medium leading-tight max-w-[90%]">A dedicated account manager to support you
                                 every step of the way.</h3>
@@ -352,7 +366,7 @@
                 <!-- Card 03 -->
                 <div class="stack-card" style="z-index: 3;">
                     <div class="stack-card-inner teal-bg">
-                        <img src="./assets/images/support-3.svg" alt="Control Panel" class="stack-card-img">
+                        <img src="./assets/images/support-3.svg" alt="Control Panel" class="stack-card-img" width="300" height="200" loading="lazy">
                         <div class="stack-card-content text-center md:text-left items-center md:items-start">
                             <h3 class="text-[18px] md:text-[40px] font-medium leading-tight max-w-[70%]">Easy control panel with free training.</h3>
                             <div class="flex flex-col md:flex-row items-center md:items-end justify-between mt-auto w-full">
@@ -367,7 +381,7 @@
                 <!-- Card 04 -->
                 <div class="stack-card" style="z-index: 4;">
                     <div class="stack-card-inner white-bg">
-                        <img src="./assets/images/support-4.svg" alt="Integration" class="stack-card-img">
+                        <img src="./assets/images/support-4.svg" alt="Integration" class="stack-card-img" width="300" height="200" loading="lazy">
                         <div class="stack-card-content text-center md:text-left items-center md:items-start">
                             <h3 class="text-[18px] md:text-[45px] font-medium leading-tight max-w-[80%]">Instant integration with payment and
                                 delivery gateways</h3>
@@ -383,7 +397,7 @@
                 <!-- Card 05 -->
                 <div class="stack-card" style="z-index: 5;">
                     <div class="stack-card-inner teal-bg">
-                        <img src="./assets/images/support-5.svg" alt="Reports" class="stack-card-img">
+                        <img src="./assets/images/support-5.svg" alt="Reports" class="stack-card-img" width="300" height="200" loading="lazy">
                         <div class="stack-card-content text-center md:text-left items-center md:items-start">
                             <h3 class="text-[18px] md:text-[45px]  max-w-[70%] font-medium leading-tight">Financial reports and performance analysis
                             </h3>
@@ -401,12 +415,12 @@
     <section id="services-section" class="services-section relative z-[2]">
         <!-- Background Container (Directly under the section) -->
         <div class="services-graphics-back">
-            <img src="./assets/images/support-watermark3.svg" alt="Trolley Teal" class="graphic-cart-service teal">
+            <img src="./assets/images/support-watermark3.svg" alt="Trolley Teal" class="graphic-cart-service teal" width="150" height="150" loading="lazy">
         </div>
 
         <!-- Inner Container (Between background and content) -->
         <div class="services-graphics-inner">
-            <img src="./assets/images/support-watermark2.svg" alt="Trolley Orange" class="graphic-cart-service orange">
+            <img src="./assets/images/support-watermark2.svg" alt="Trolley Orange" class="graphic-cart-service orange" width="180" height="180" loading="lazy">
         </div>
 
         <div class="services-content-container px-[60px] relative z-10">
@@ -453,7 +467,7 @@
                 <div class="service-card flex-shrink-0 reveal-scale">
                     <div class="service-img-wrapper">
                         <img src="./assets/images/marketing.svg" alt="Digital Marketing Services for Online Stores"
-                            class="service-img">
+                            class="service-img" width="400" height="300" loading="lazy">
                     </div>
                     <div class="service-content">
                         <h3 class="service-title text-[18px] md:text-[24px] font-medium">Marketing</h3>
@@ -471,7 +485,7 @@
                 <div class="service-card flex-shrink-0 reveal-scale">
                     <div class="service-img-wrapper">
                         <img src="./assets/images/photography.svg" alt="Professional Product Photography"
-                            class="service-img">
+                            class="service-img" width="400" height="300" loading="lazy">
                     </div>
                     <div class="service-content">
                         <h3 class="service-title text-[18px] md:text-[24px] font-medium">Photography</h3>
@@ -489,7 +503,7 @@
                 <div class="service-card flex-shrink-0 reveal-scale">
                     <div class="service-img-wrapper">
                         <img src="./assets/images/support.svg" alt="Technical Support and Customer Care"
-                            class="service-img">
+                            class="service-img" width="400" height="300" loading="lazy">
                     </div>
                     <div class="service-content">
                         <h3 class="service-title text-[18px] md:text-[24px] font-medium">Support</h3>
@@ -507,7 +521,7 @@
                 <div class="service-card flex-shrink-0 reveal-scale">
                     <div class="service-img-wrapper">
                         <img src="https://images.unsplash.com/photo-1557804506-669a67965ba0?auto=format&fit=crop&w=500&q=60"
-                            alt="Social Media Management and Marketing" class="service-img">
+                            alt="Social Media Management and Marketing" class="service-img" width="400" height="300" loading="lazy">
                     </div>
                     <div class="service-content">
                         <h3 class="service-title text-[18px] md:text-[24px] font-medium">Social Media</h3>
@@ -525,7 +539,7 @@
                 <!-- Group 2 (4 more cards) -->
                 <div class="service-card flex-shrink-0 reveal-scale">
                     <div class="service-img-wrapper"><img src="./assets/images/marketing.svg" alt="Service"
-                            class="service-img"></div>
+                            class="service-img" width="400" height="300" loading="lazy"></div>
                     <div class="service-content">
                         <h3 class="service-title text-[18px] md:text-[24px] font-medium">E-Commerce Strategy</h3>
                         <p class="service-desc text-[15px] md:text-[16px] leading-relaxed">Professional planning for your store growth and success.</p>
@@ -536,7 +550,7 @@
                 </div>
                 <div class="service-card flex-shrink-0 reveal-scale">
                     <div class="service-img-wrapper"><img src="./assets/images/photography.svg" alt="Service"
-                            class="service-img"></div>
+                            class="service-img" width="400" height="300" loading="lazy"></div>
                     <div class="service-content">
                         <h3 class="service-title text-[18px] md:text-[24px] font-medium">SEO Optimization</h3>
                         <p class="service-desc text-[15px] md:text-[16px] leading-relaxed">Professional planning for your store growth and success.</p>
@@ -547,7 +561,7 @@
                 </div>
                 <div class="service-card flex-shrink-0 reveal-scale">
                     <div class="service-img-wrapper"><img src="./assets/images/support.svg" alt="Service"
-                            class="service-img"></div>
+                            class="service-img" width="400" height="300" loading="lazy"></div>
                     <div class="service-content">
                         <h3 class="service-title text-[18px] md:text-[24px] font-medium">Content Creation</h3>
                         <p class="service-desc text-[15px] md:text-[16px] leading-relaxed">Professional planning for your store growth and success.</p>
@@ -559,7 +573,7 @@
                 <div class="service-card flex-shrink-0 reveal-scale">
                     <div class="service-img-wrapper"><img
                             src="https://images.unsplash.com/photo-1557804506-669a67965ba0?auto=format&fit=crop&w=500&q=60"
-                            alt="Service" class="service-img"></div>
+                            alt="Service" class="service-img" width="400" height="300" loading="lazy"></div>
                     <div class="service-content">
                         <h3 class="service-title text-[18px] md:text-[24px] font-medium">Branding</h3>
                         <p class="service-desc text-[15px] md:text-[16px] leading-relaxed">Professional planning for your store growth and success.</p>
@@ -665,11 +679,11 @@
                 <div class="slider-wrapper">
                     <div class="slider-track">
                         <!-- First Set -->
-                        <div class="slider-item"><img src="./assets/images/partner1.svg" alt="Trusted Partner 1"></div>
-                        <div class="slider-item"><img src="./assets/images/partner2.svg" alt="Trusted Partner 2"></div>
-                        <div class="slider-item"><img src="./assets/images/partner3.svg" alt="Trusted Partner 3"></div>
-                        <div class="slider-item"><img src="./assets/images/partner4.svg" alt="Trusted Partner 4"></div>
-                        <div class="slider-item"><img src="./assets/images/partner5.svg" alt="Trusted Partner 5"></div>
+                        <div class="slider-item"><img src="./assets/images/partner1.svg" alt="Trusted Partner 1" width="150" height="80" loading="lazy"></div>
+                        <div class="slider-item"><img src="./assets/images/partner2.svg" alt="Trusted Partner 2" width="150" height="80" loading="lazy"></div>
+                        <div class="slider-item"><img src="./assets/images/partner3.svg" alt="Trusted Partner 3" width="150" height="80" loading="lazy"></div>
+                        <div class="slider-item"><img src="./assets/images/partner4.svg" alt="Trusted Partner 4" width="150" height="80" loading="lazy"></div>
+                        <div class="slider-item"><img src="./assets/images/partner5.svg" alt="Trusted Partner 5" width="150" height="80" loading="lazy"></div>
                     </div>
                 </div>
             </div>
@@ -712,70 +726,70 @@
                 <!-- Design 1: Health & Beauty -->
                 <div class="design-card flex-shrink-0">
                     <div class="design-icon-wrapper">
-                        <img src="./assets/images/ecommerce1.svg" alt="Health and Beauty">
+                        <img src="./assets/images/ecommerce1.svg" alt="Health and Beauty" width="200" height="150" loading="lazy">
                     </div>
                     <span class="design-label">Health & Beauty</span>
                 </div>
                 <!-- Design 2: Perfumes -->
                 <div class="design-card flex-shrink-0">
                     <div class="design-icon-wrapper">
-                        <img src="./assets/images/ecommerce2.svg" alt="Perfumes">
+                        <img src="./assets/images/ecommerce2.svg" alt="Perfumes" width="200" height="150" loading="lazy">
                     </div>
                     <span class="design-label">Perfumes</span>
                 </div>
                 <!-- Design 3: Electronics -->
                 <div class="design-card flex-shrink-0">
                     <div class="design-icon-wrapper">
-                        <img src="./assets/images/ecommerce3.svg" alt="Electronics">
+                        <img src="./assets/images/ecommerce3.svg" alt="Electronics" width="200" height="150" loading="lazy">
                     </div>
                     <span class="design-label">Electronics</span>
                 </div>
                 <!-- Design 4: Flowers -->
                 <div class="design-card flex-shrink-0">
                     <div class="design-icon-wrapper">
-                        <img src="./assets/images/ecommerce4.svg" alt="Flowers">
+                        <img src="./assets/images/ecommerce4.svg" alt="Flowers" width="200" height="150" loading="lazy">
                     </div>
                     <span class="design-label">Flowers</span>
                 </div>
                 <!-- Design 5: Outfits -->
                 <div class="design-card flex-shrink-0">
                     <div class="design-icon-wrapper">
-                        <img src="./assets/images/ecommerce5.svg" alt="Outfits">
+                        <img src="./assets/images/ecommerce5.svg" alt="Outfits" width="200" height="150" loading="lazy">
                     </div>
                     <span class="design-label">Outfits</span>
                 </div>
                 <!-- Design 6: Accessories -->
                 <div class="design-card flex-shrink-0">
                     <div class="design-icon-wrapper">
-                        <img src="./assets/images/ecommerce1.svg" alt="Accessories">
+                        <img src="./assets/images/ecommerce1.svg" alt="Accessories" width="200" height="150" loading="lazy">
                     </div>
                     <span class="design-label">Accessories</span>
                 </div>
                 <!-- Design 7: Beauty Care -->
                 <div class="design-card flex-shrink-0">
                     <div class="design-icon-wrapper">
-                        <img src="./assets/images/ecommerce2.svg" alt="Beauty Care">
+                        <img src="./assets/images/ecommerce2.svg" alt="Beauty Care" width="200" height="150" loading="lazy">
                     </div>
                     <span class="design-label">Beauty Care</span>
                 </div>
                 <!-- Design 8: Home Decor -->
                 <div class="design-card flex-shrink-0">
                     <div class="design-icon-wrapper">
-                        <img src="./assets/images/ecommerce3.svg" alt="Home Decor">
+                        <img src="./assets/images/ecommerce3.svg" alt="Home Decor" width="200" height="150" loading="lazy">
                     </div>
                     <span class="design-label">Home Decor</span>
                 </div>
                 <!-- Design 9: Sports -->
                 <div class="design-card flex-shrink-0">
                     <div class="design-icon-wrapper">
-                        <img src="./assets/images/ecommerce4.svg" alt="Sports">
+                        <img src="./assets/images/ecommerce4.svg" alt="Sports" width="200" height="150" loading="lazy">
                     </div>
                     <span class="design-label">Sports</span>
                 </div>
                 <!-- Design 10: Watches -->
                 <div class="design-card flex-shrink-0">
                     <div class="design-icon-wrapper">
-                        <img src="./assets/images/ecommerce5.svg" alt="Watches">
+                        <img src="./assets/images/ecommerce5.svg" alt="Watches" width="200" height="150" loading="lazy">
                     </div>
                     <span class="design-label">Watches</span>
                 </div>
@@ -789,7 +803,7 @@
             <!-- Background Layer (Teal Trolley) under all layers -->
             <div class="support-graphics-back">
                 <img src="./assets/images/support-watermark1.svg" alt="Decorative Background Trolley Icon"
-                    class="graphic-cart teal">
+                    class="graphic-cart teal" width="200" height="200" loading="lazy">
             </div>
 
             <!-- Main Card -->
@@ -797,7 +811,7 @@
                 <!-- Inner Background Layer (Orange Trolley) restricted by card boundaries -->
                 <div class="support-graphics-inner-back">
                     <img src="./assets/images/support-watermark2.svg" alt="Decorative Interior Trolley Icon"
-                        class="graphic-cart orange">
+                        class="graphic-cart orange" width="250" height="250" loading="lazy">
                 </div>
 
                 <div class="support-banner-content">
@@ -825,7 +839,7 @@
                         <i class="fa-solid fa-phone"></i>
                     </a>
                     <a href="mailto:info@etrolley.net" class="support-icon-btn email" aria-label="Send us an Email">
-                        <img src="./assets/images/gmail.svg" alt="Gmail Contact" class="w-8 h-8">
+                        <img src="./assets/images/gmail.svg" alt="Gmail Contact" class="w-8 h-8" width="32" height="32" loading="lazy">
                     </a>
                 </div>
             </div>
@@ -843,7 +857,7 @@
             <div class="footer-grid">
                 <div>
                     <div class="footer-logo-box">
-                        <img src="./assets/images/footer-logo.svg" alt="E-Trolley Official Footer Logo">
+                        <img src="./assets/images/footer-logo.svg" alt="E-Trolley Official Footer Logo" width="150" height="50" loading="lazy">
                     </div>
                 </div>
                 <div>
@@ -917,13 +931,13 @@
         </svg>
     </button>
 
-    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js" defer></script>
     <!-- GSAP & ScrollTrigger -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
-    <script src="https://assets.codepen.io/16327/ScrollSmoother.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js" defer></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js" defer></script>
+    <script src="https://assets.codepen.io/16327/ScrollSmoother.min.js" defer></script>
 
-    <script src="./js/script.js"></script>
+    <script src="./js/script.js" defer></script>
 </body>
 
 </html>
