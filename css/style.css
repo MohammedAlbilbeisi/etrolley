@@ -4,10 +4,9 @@
     box-sizing: border-box;
 }
 
-/* --- Custom Text Selection --- */
 ::selection {
-    background-color: #1A1A1A; /* لون داكن جداً للموقع بشكل عام */
-    color: #F5C99A; /* لون النص الذهبي */
+    background-color: #1A1A1A; 
+    color: #F5C99A; 
 }
 
 ::-moz-selection {
@@ -15,11 +14,10 @@
     color: #F5C99A;
 }
 
-/* تخصيص التحديد للعناوين التفاعلية (حرف بحرف) */
 .click-animate-title ::selection {
-    background-color: transparent; /* إزالة خلفية التحديد لجعل الحرف يبرز وحده */
-    color: #F5C99A !important; /* تغيير لون الحرف للذهبي عند محاولة تحديده */
-    text-shadow: 0 0 15px rgba(245, 201, 154, 0.6); /* إضافة توهج بسيط حول الحرف المختار */
+    background-color: transparent; 
+    color: #F5C99A !important; 
+    text-shadow: 0 0 15px rgba(245, 201, 154, 0.6); 
 }
 
 .click-animate-title ::-moz-selection {
@@ -32,7 +30,6 @@ html {
     scroll-behavior: smooth !important;
 }
 
-/* --- Scroll to Top Button --- */
 .scroll-to-top {
     position: fixed;
     bottom: 30px;
@@ -73,7 +70,7 @@ html {
     transform: translateY(-2px);
 }
 
-/* --- ScrollSmoother Setup --- */
+/* Footer reveal: pass clicks through fixed scroll wrapper */
 #smooth-wrapper {
     overflow: hidden;
     position: fixed;
@@ -85,7 +82,7 @@ html {
     bottom: 0;
     z-index: 10;
     background-color: transparent;
-    pointer-events: none; /* يسمح بمرور النقرات للفوتر في الأسفل */
+    pointer-events: none;
 }
 
 #smooth-content {
@@ -93,7 +90,7 @@ html {
     width: 100%;
     background-color: transparent;
     padding-top: 100px;
-    pointer-events: none; /* يسمح بمرور النقرات */
+    pointer-events: none; 
 }
 
 .content-body-reveal {
@@ -101,13 +98,13 @@ html {
     position: relative;
     z-index: 20;
     box-shadow: 0 50px 100px rgba(0,0,0,0.1);
-    pointer-events: auto; /* يعيد تفعيل النقرات للمحتوى الأساسي فقط */
+    pointer-events: auto; 
 }
 
 .footer-reveal-spacer {
     height: 0;
     background-color: transparent;
-    pointer-events: none; /* يضمن بقاء الفراغ قابلاً للنقر من خلاله */
+    pointer-events: none; 
 }
 
 html, body {
@@ -124,7 +121,6 @@ body {
     position: relative;
 }
 
-/* --- Premium Noise Overlay --- */
 body::before {
     content: "";
     position: fixed;
@@ -143,7 +139,6 @@ h2 {
     line-height: 1.2;
 }
 
-/* --- Heading Decorations --- */
 .title-stroke {
     color: #FFFFFF;
     text-shadow: 
@@ -158,12 +153,12 @@ h2 {
     font-variant-ligatures: none;
     font-feature-settings: "liga" 0, "ss01" 0, "ss02" 0, "ss03" 0, "ss04" 0, "salt" 0;
     -webkit-font-smoothing: antialiased;
-    font-weight: 800; /* تجنب الوزن الأقصى الذي قد يحتوي على أشكال مشوهة */
+    font-weight: 800; 
     letter-spacing: normal;
 }
 
 .title-solid {
-    color: #1A1A1A; /* أسود بشكل افتراضي */
+    color: #1A1A1A; 
     font-variant-ligatures: none;
     font-feature-settings: "liga" 0, "ss01" 0, "ss02" 0, "ss03" 0, "ss04" 0, "salt" 0;
     -webkit-font-smoothing: antialiased;
@@ -171,63 +166,53 @@ h2 {
     letter-spacing: normal;
 }
 
-/* --- Heading Decorations & Hover Effects --- */
 .click-animate-title {
     cursor: pointer;
-    display: block; /* تغيير لـ block لضمان تغطية المساحة بالكامل */
+    display: block; 
     width: fit-content;
     position: relative;
     z-index: 10;
 }
 
-/* الحالة الأصلية للنص المصمت (أسود صريح قبل الهوفر) */
 .click-animate-title .title-solid, 
 .click-animate-title .title-solid span {
     color: #1A1A1A !important;
     transition: all 0.4s ease-in-out !important;
-    font-weight: 600 !important; /* وزن 600 يضمن شكلاً نظيفاً جداً لحرف R */
+    font-weight: 600 !important; 
     font-variant-ligatures: none !important;
     font-feature-settings: "liga" 0, "dlig" 0, "ss01" 0, "ss02" 0, "ss03" 0, "ss04" 0, "ss05" 0, "ss06" 0, "ss07" 0, "ss08" 0, "ss09" 0, "ss10" 0 !important;
 }
 
-/* الحالة الأصلية للنص المفرغ (أبيض بحدود سوداء) */
 .click-animate-title .title-stroke,
 .click-animate-title .title-stroke span {
     color: #FFFFFF !important;
-    /* -webkit-text-stroke: 1px #1A1A1A !important; */
+    
     transition: all 0.4s ease-in-out !important;
-    font-weight: 600 !important; /* وزن 600 هو الأفضل لمنع التداخلات الداخلية في حرف R */
+    font-weight: 600 !important; 
     font-variant-ligatures: none !important;
     font-feature-settings: "liga" 0, "dlig" 0, "ss01" 0, "ss02" 0, "ss03" 0, "ss04" 0, "ss05" 0, "ss06" 0, "ss07" 0, "ss08" 0, "ss09" 0, "ss10" 0 !important;
 }
 
-/* --- التأثير عند الهوفر (يعمل على العنوان بالكامل) --- */
-
-/* النص المصمت يتحول بالكامل للون التيل */
 .click-animate-title:hover .title-solid,
 .click-animate-title:hover .title-solid span {
     color: #316C6B !important;
 }
 
-/* النص المفرغ يتحول بالكامل للون الذهبي ويمتلئ */
 .click-animate-title:hover .title-stroke,
 .click-animate-title:hover .title-stroke span {
     color: #F5C99A !important;
     -webkit-text-stroke: 0px transparent !important;
 }
 
-/* حركة بسيطة لكل حرف عند الهوفر المباشر عليه (اختياري للجمالية) */
 .click-animate-title span span:hover {
     transform: translateY(-5px);
 }
 
-/* حالة النقر للحروف */
 .click-animate-title span span.active-char {
     color: #F5C99A !important;
     transform: scale(1.4) translateY(-10px);
 }
 
-/* --- Header --- */
 header {
     background: rgba(255, 255, 255, 0.85);
     backdrop-filter: blur(15px);
@@ -268,10 +253,9 @@ header {
     justify-content: space-between;
     position: relative;
     min-height: 100px;
-    /* Space for logo */
+    
 }
 
-/* Gray line under logo */
 .header-content::after {
     content: "";
     position: absolute;
@@ -284,7 +268,7 @@ header {
 
 .nav-links {
     margin-left: 350px;
-    /* Avoid logo overlap */
+    
     display: flex;
     align-items: center;
     gap: 45px;
@@ -331,7 +315,7 @@ header {
     display: flex;
     align-items: center;
     gap: 20px;
-    /* Reduced from 40px */
+    
 }
 
 .phone-section {
@@ -342,11 +326,11 @@ header {
 
 .phone-icon-wrapper {
     width: 55px;
-    /* Icon size 55 */
+    
     height: 55px;
-    /* Icon size 55 */
+    
     background: #FEE2E2;
-    /* Light orange/red background as in image */
+    
     border-radius: 50%;
     display: flex;
     align-items: center;
@@ -355,9 +339,9 @@ header {
 
 .phone-icon-img {
     width: 40px;
-    /* Adjust size of the actual icon within the wrapper */
+    
     height: 40px;
-    /* Adjust size of the actual icon within the wrapper */
+    
 }
 
 .phone-info {
@@ -367,29 +351,28 @@ header {
 
 .phone-label {
     font-size: 14px;
-    /* Font 14 */
+    
     font-weight: 500;
     color: #7C7171;
-    /* Font color #7C7171 */
+    
     line-height: 1.2;
 }
 
 .phone-number {
     font-size: 12px;
-    /* Font 16 */
+    
     font-weight: 700;
-    /* Size 700 */
+    
     color: #316C6B;
-    /* Font color #316C6B */
+    
     line-height: 1.2;
 }
 
-/* Custom styles for validation text and icon */
 .validation-icon-wrapper {
     width: 20px;
-    /* Adjust as needed */
+    
     height: 20px;
-    /* Adjust as needed */
+    
     display: flex;
     align-items: center;
     justify-content: center;
@@ -399,13 +382,13 @@ header {
 
 .validation-text-p {
     font-size: 11px;
-    /* Font 14 */
+    
     color: #555555;
-    /* Font color #555555 */
+    
     font-weight: 500;
-    /* Assuming font-medium maps to 500 */
+    
     line-height: 1.6;
-    /* Adjust as needed */
+    
     max-width: 200px;
 }
 
@@ -425,7 +408,6 @@ header {
     z-index: 1;
 }
 
-/* Shine effect */
 .btn-create-store::after {
     content: "";
     position: absolute;
@@ -453,7 +435,6 @@ header {
     transition: all 0.6s ease;
 }
 
-/* --- Hero --- */
 .hero {
     position: relative;
     min-height: 700px;
@@ -686,10 +667,9 @@ header {
     color: #316C6B;
 }
 
-/* --- Creative Steps --- */
 .creative-steps {
     padding-top: 120px;
-    padding-bottom: 0; /* No padding at bottom */
+    padding-bottom: 0; 
     padding-left: 20px;
     padding-right: 20px;
     background: #FAFAFA;
@@ -757,12 +737,13 @@ header {
     overflow: hidden;
     z-index: 100;
     box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+    touch-action: manipulation;
+    -webkit-tap-highlight-color: transparent;
 }
 
-/* طبقة التعبئة الخضراء */
 .cta-fill {
     position: absolute;
-    width: 250%; /* حجم كبير جداً */
+    width: 250%; 
     height: 250%;
     background-color: #316C6B !important;
     border-radius: 50%;
@@ -782,25 +763,24 @@ header {
     text-transform: none;
     text-align: center;
     line-height: 1.1;
-    z-index: 10 !important; /* فوق التعبئة دائماً */
+    z-index: 10 !important; 
     pointer-events: none;
     display: block;
     position: relative;
     transition: color 0.2s ease;
 }
 
-/* ضمان تحول النص للأبيض فوراً عند الهوفر في الـ CSS كاحتياط */
-.cta-circle-wrapper:hover span {
-    color: #FFFFFF !important;
+@media (hover: hover) and (pointer: fine) {
+    .cta-circle-wrapper:hover span {
+        color: #FFFFFF !important;
+    }
 }
 
-/* Optional: Magnetic effect class if needed for JS */
 .magnetic-wrap {
     display: inline-block;
     transition: transform 0.3s cubic-bezier(0.23, 1, 0.32, 1);
 }
 
-/* --- What Makes Us Different --- */
 .different-section {
     padding: 100px 0;
     background: #FFFFFF;
@@ -808,7 +788,6 @@ header {
     z-index: 0;
 }
 
-/* --- Services --- */
 .services-section {
     padding: 100px 0;
     padding-bottom: 50px;
@@ -875,14 +854,14 @@ header {
     display: flex;
     flex-direction: column;
     box-shadow: 0 15px 35px rgba(0, 0, 0, 0.05);
-    transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1); /* انتقال أنعم واحترافي */
+    transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1); 
     pointer-events: auto !important;
     border: 1px solid transparent;
 }
 
 .service-card:hover {
-    transform: translateY(-15px) scale(1.02); /* رفع البطاقة مع تكبير بسيط */
-    box-shadow: 0 30px 60px rgba(49, 108, 107, 0.15); /* توهج بلون التيل الفخم */
+    transform: translateY(-15px) scale(1.02); 
+    box-shadow: 0 30px 60px rgba(49, 108, 107, 0.15); 
     border-radius: 2vw !important;
     border-color: rgba(49, 108, 107, 0.1);
 }
@@ -894,7 +873,7 @@ header {
     display: flex;
     align-items: center;
     justify-content: center;
-    overflow: hidden; /* لضمان عدم خروج الصورة عند التكبير */
+    overflow: hidden; 
 }
 
 .service-img {
@@ -904,11 +883,11 @@ header {
     pointer-events: none;
     user-select: none;
     -webkit-user-drag: none;
-    transition: transform 0.8s cubic-bezier(0.4, 0, 0.2, 1); /* أنميشن للصورة */
+    transition: transform 0.8s cubic-bezier(0.4, 0, 0.2, 1); 
 }
 
 .service-card:hover .service-img {
-    transform: scale(1.1); /* تكبير الصورة داخل البطاقة عند الهوفر */
+    transform: scale(1.1); 
 }
 
 .service-content {
@@ -942,7 +921,7 @@ header {
     background: #316C6B;
     color: #FFFFFF;
     border: none;
-    border-radius: 3.125vw; /* تم تعديل انحناء الزوايا كما طلبت */
+    border-radius: 3.125vw; 
     font-weight: 600;
     font-size: .9722222222vw;
     cursor: pointer;
@@ -955,7 +934,6 @@ header {
     margin-top: auto; 
 }
 
-/* إلغاء تأثير التبادل في الارتفاع */
 .service-card:nth-child(even),
 .service-card:nth-child(odd) {
     transform: translateY(0);
@@ -975,9 +953,6 @@ header {
     font-weight: 600;
 }
 
-/* تم دمج تنسيقات الهيدر ضمن الفليكس في HTML لتطابق الصورة بدقة */
-
-/* ضبط المسافات والمحاذاة للقسم ليبدأ من حافة الصفحة */
 .services-content-container {
     padding-left: 0 !important;
     padding-right: 0 !important;
@@ -985,21 +960,51 @@ header {
 }
 
 .services-content-container > div:first-child {
-    padding-left: 60px; /* الحفاظ على مسافة العنوان فقط وليس البطاقات */
+    padding-left: 60px;
+}
+
+.service-pagination {
+    transform: translate(-56px, 0);
 }
 
 #services-slider {
-    padding-top: 20px; 
-    padding-bottom: 50px; 
+    padding-top: 20px;
+    padding-bottom: 50px;
     display: flex;
-    gap: 39.225px; /* جعل المسافة بين البطاقات مساوية للمسافة من حافة الصفحة (60px - 20.775px) */
-    padding-left: 60px; 
-    transform: translate3d(-20.775px, 0px, 0px); 
-}
+    gap: 39.225px;
+    padding-left: 60px;
+    transform: translate3d(-20.775px, 0px, 0px);
     pointer-events: auto !important;
     touch-action: pan-y;
     user-select: none;
     -webkit-user-drag: none;
+}
+
+.container-pad {
+    padding-left: 60px;
+    padding-right: 60px;
+}
+
+/* Native scroll when ScrollSmoother is off (tablet/mobile) */
+body.mobile-scroll #smooth-wrapper {
+    position: relative !important;
+    height: auto !important;
+    width: 100% !important;
+    overflow: visible !important;
+    pointer-events: auto !important;
+}
+
+body.mobile-scroll #smooth-content {
+    padding-top: 88px !important;
+    pointer-events: auto !important;
+}
+
+body.mobile-scroll .content-body-reveal {
+    box-shadow: none;
+}
+
+body.mobile-scroll .footer-reveal-spacer {
+    height: 0 !important;
 }
 
 .btn-learn-more:hover {
@@ -1007,7 +1012,6 @@ header {
     color: #316C6B;
 }
 
-/* Hide Scrollbar */
 .hide-scrollbar::-webkit-scrollbar {
     display: none;
 }
@@ -1098,14 +1102,13 @@ header {
     line-height: 1.6;
 }
 
-/* Stacking Cards Styles */
 .stacking-cards-container {
     position: relative;
     width: 100vw;
     height: 725px;
     margin-top: 30px;
     overflow: visible;
-    margin-left: calc(-50vw + 50%); /* Start from the very left edge of the viewport */
+    margin-left: calc(-50vw + 50%); 
 }
 
 .stack-card {
@@ -1118,7 +1121,7 @@ header {
     align-items: center;
     justify-content: center;
     will-change: transform;
-    padding: 0 20px; /* 20px gap from left and right edges */
+    padding: 0 20px; 
 }
 .stack-card h3 {
      font-weight: 700;
@@ -1129,9 +1132,9 @@ header {
     border-radius: 40px;
     overflow: hidden;
     display: grid;
-    grid-template-columns: 1fr 1fr; /* 50% for each card */
-    gap: 20px; /* 20px gap between the image and content cards */
-    width: 100%; /* Fill the container width (minus stack-card padding) */
+    grid-template-columns: 1fr 1fr; 
+    gap: 20px; 
+    width: 100%; 
     max-width: none;
     height: 725px;
 }
@@ -1209,7 +1212,6 @@ header {
     }
 }
 
-/* Partners Slider Styles */
 .partners-section {
     padding: 35px 0;
     background: linear-gradient(90deg, rgba(154, 181, 172, 0.1) 0%, #FEFFFF 30%, #FFFFFF 70%, rgba(245, 201, 154, 0.1) 100%);
@@ -1282,7 +1284,6 @@ header {
     width: max-content;
 }
 
-/* --- Clients & Partners --- */
 .logos-section {
     padding: 80px 0;
     background: #FFFFFF;
@@ -1309,7 +1310,6 @@ header {
     filter: grayscale(1);
 }
 
-/* --- Distinctive Designs --- */
 .designs-section {
     padding: 60px 0;
     background: #FFFFFF;
@@ -1324,27 +1324,27 @@ header {
     transition: all 0.3s ease;
     border: 1px solid transparent;
     width: calc((100% - (24px * 4)) / 5);
-    /* Default for 5 cards with 24px gap */
+    
 }
 
 @media (max-width: 1200px) {
     .design-card {
         width: calc((100% - (24px * 2)) / 3);
-        /* 3 cards on medium screens */
+        
     }
 }
 
 @media (max-width: 768px) {
     .design-card {
         width: calc((100% - 24px) / 2);
-        /* 2 cards on small screens */
+        
     }
 }
 
 @media (max-width: 480px) {
     .design-card {
         width: 100%;
-        /* 1 card on mobile */
+        
     }
 }
 
@@ -1379,13 +1379,12 @@ header {
     color: #1A1A1A;
 }
 
-/* --- Support Banner --- */
 .support-banner-section {
     padding: 120px 0;
     background: #FFFFFF;
     position: relative;
     overflow: visible;
-    z-index: 10; /* أعلى من الفوتر لتغطيته */
+    z-index: 10; 
     box-shadow: 0 50px 100px rgba(0, 0, 0, 0.1);
 }
 
@@ -1581,16 +1580,15 @@ header {
     color: #1A1A1A;
 }
 
-/* --- Footer --- */
 footer {
     padding: 100px 0 40px;
     background: #FFFFFF;
     border-top: 1px solid #F1F5F9;
-    position: fixed; /* تثبيت الفوتر في الخلفية */
+    position: fixed; 
     bottom: 0;
     left: 0;
     width: 100%;
-    z-index: 15; /* أعلى من الـ wrapper (10) وأقل من المحتوى (20) لتمكين التفاعل */
+    z-index: 15; 
     will-change: transform;
 }
 
@@ -1777,7 +1775,6 @@ footer {
     margin: 0 5px;
 }
 
-/* Circular Professional Loader */
 html.lenis,
 html.lenis body {
     height: auto;
@@ -1799,7 +1796,6 @@ html.lenis body {
     pointer-events: none;
 }
 
-/* --- Page Loader --- */
 #loader-wrapper {
     position: fixed;
     top: 0;
@@ -1823,7 +1819,6 @@ html.lenis body {
     align-items: center;
 }
 
-/* Double Liquid Rings */
 .loader-ring {
     position: absolute;
     border-radius: 50%;
@@ -1926,7 +1921,6 @@ body.loading {
     overflow: hidden;
 }
 
-/* --- Mobile Menu --- */
 .mobile-menu-btn {
     display: none;
     background: none;
@@ -1995,7 +1989,17 @@ body.loading {
     margin-top: auto;
 }
 
+/* Tablet & mobile layout (desktop unchanged) */
 @media (max-width: 1200px) {
+    .container-pad {
+        padding-left: 24px;
+        padding-right: 24px;
+    }
+
+    #smooth-content {
+        padding-top: 88px;
+    }
+
     .nav-logo-container {
         left: 40px;
     }
@@ -2009,18 +2013,301 @@ body.loading {
         gap: 25px;
     }
 
-    .hero-main-wrapper {
-        left: 300px;
-        width: 600px;
+    .hero {
+        min-height: auto;
     }
 
-    .hero-title {
-        font-size: 60px;
+    .hero-container-absolute {
+        padding: 0 24px;
+        height: auto;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+    }
+
+    .qr-section-absolute {
+        position: relative;
+        top: 0;
+        left: 0;
+        width: 100%;
+        max-width: 280px;
+        margin: 24px auto 0;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .qr-section-absolute .flex.items-center {
+        margin-top: 24px !important;
+    }
+
+    .qr-card-img {
+        width: 160px;
+        margin: 0 auto;
+    }
+
+    .validation-text-p {
+        max-width: 100%;
+        text-align: center;
+    }
+
+    .hero-main-wrapper {
+        position: relative;
+        top: 0;
+        left: 0;
+        width: 100%;
+        max-width: 640px;
+        margin: 20px auto;
+        text-align: center;
+    }
+
+    .hero-watermark-text {
+        top: 45%;
+        left: 50%;
+        width: 95%;
+        height: 70%;
+        opacity: 0.35;
     }
 
     .laptop-visual-absolute {
-        width: 500px;
-        right: 50px;
+        position: relative;
+        top: 0;
+        right: 0;
+        bottom: auto;
+        width: 100%;
+        max-width: 380px;
+        transform: none !important;
+        margin: 16px auto;
+    }
+
+    .btn-hero-wrap {
+        position: relative;
+        top: 0;
+        left: 0;
+        margin: 24px auto 32px;
+        align-items: center;
+        width: 100%;
+    }
+
+    .social-bar-absolute {
+        position: relative;
+        top: auto;
+        right: auto;
+        margin: 24px auto 40px;
+        flex-direction: row;
+        justify-content: center;
+    }
+
+    .writing-mode-vertical-rl {
+        writing-mode: horizontal-tb;
+        transform: none;
+    }
+
+    .social-bar-absolute .flex-col {
+        flex-direction: row;
+    }
+
+    .creative-steps .md\:-translate-y-\[235px\] {
+        transform: none !important;
+    }
+
+    .step-card {
+        min-height: 280px;
+        padding: 28px;
+    }
+
+    .step-description {
+        font-size: 18px;
+    }
+
+    .different-section .max-w-\[1440px\],
+    .logos-section .max-w-\[1440px\],
+    .designs-section .max-w-\[1440px\],
+    footer .max-w-\[1440px\] {
+        padding-left: 24px;
+        padding-right: 24px;
+    }
+
+    .services-content-container {
+        padding-left: 24px !important;
+        padding-right: 24px !important;
+    }
+
+    .services-content-container > div:first-child {
+        padding-left: 0 !important;
+    }
+
+    #services-slider {
+        padding-left: 24px;
+        transform: none;
+        overflow-x: auto;
+        -webkit-overflow-scrolling: touch;
+        scroll-snap-type: x mandatory;
+        gap: 20px;
+    }
+
+    #service-pagination {
+        transform: none !important;
+    }
+
+    .service-card {
+        width: min(72vw, 300px) !important;
+        height: auto !important;
+        min-height: 380px;
+        scroll-snap-align: start;
+        flex-shrink: 0;
+        border-radius: 16px !important;
+    }
+
+    .service-img-wrapper {
+        height: 180px !important;
+    }
+
+    .service-content {
+        padding: 20px !important;
+    }
+
+    .service-title {
+        font-size: 20px !important;
+        margin-bottom: 12px !important;
+    }
+
+    .service-desc {
+        font-size: 15px !important;
+        margin-bottom: 16px !important;
+    }
+
+    .btn-learn-more {
+        width: 100% !important;
+        min-width: 0 !important;
+        height: 48px !important;
+        border-radius: 24px !important;
+        font-size: 15px !important;
+    }
+
+    .stacking-cards-container {
+        width: 100%;
+        margin-left: 0;
+        height: auto;
+    }
+
+    .stack-card {
+        position: relative;
+        height: auto;
+        margin-bottom: 24px;
+        padding: 0;
+    }
+
+    .stack-card-inner {
+        grid-template-columns: 1fr;
+        height: auto;
+        gap: 0;
+    }
+
+    .stack-card-img {
+        width: 100%;
+        height: 240px;
+        object-fit: cover;
+    }
+
+    .stack-card-content {
+        padding: 28px 24px;
+        width: 100%;
+        height: auto;
+    }
+
+    .stack-card-content h3 {
+        max-width: 100% !important;
+    }
+
+    .stack-card-content span.text-\[120px\] {
+        font-size: 72px !important;
+    }
+
+    .partners-container {
+        flex-direction: column;
+        gap: 24px;
+        text-align: center;
+    }
+
+    .partners-label {
+        white-space: normal;
+    }
+
+    .slider-wrapper {
+        width: 100%;
+    }
+
+    .support-banner-container {
+        padding: 0 24px;
+    }
+
+    .support-banner-card {
+        width: 100%;
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+        padding: 40px 28px;
+        gap: 32px;
+    }
+
+    .support-banner-content {
+        align-items: center;
+    }
+
+    .support-banner-title {
+        max-width: 100%;
+        text-align: center;
+    }
+
+    .support-actions {
+        justify-content: center;
+        flex-wrap: wrap;
+    }
+
+    .graphic-cart.teal,
+    .graphic-cart.orange,
+    .graphic-cart-service.teal,
+    .graphic-cart-service.orange {
+        opacity: 0.35;
+        transform: scale(0.75);
+    }
+
+    #logos-slider,
+    #designs-slider {
+        overflow-x: auto;
+        -webkit-overflow-scrolling: touch;
+        scroll-snap-type: x mandatory;
+        padding-bottom: 8px;
+    }
+
+    .client-logo-card {
+        width: min(70vw, 220px);
+        height: auto;
+        aspect-ratio: 239 / 205;
+        scroll-snap-align: start;
+    }
+
+    .design-card {
+        width: min(70vw, 260px) !important;
+        scroll-snap-align: start;
+        flex-shrink: 0;
+    }
+
+    .logos-section .flex.flex-1 {
+        padding-left: 0;
+        padding-right: 0;
+    }
+
+    footer {
+        position: relative !important;
+        padding: 60px 0 24px;
+    }
+
+    .footer-grid {
+        grid-template-columns: 1fr 1fr;
+        gap: 28px;
     }
 }
 
@@ -2054,94 +2341,11 @@ body.loading {
         display: block;
     }
 
-    .hero-container-absolute {
-        padding: 0 20px;
-        height: auto;
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        text-align: center;
-    }
-
-    .qr-section-absolute {
-        position: relative;
-        top: 0;
-        left: 0;
-        margin: 30px 0;
-        width: 100%;
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-    }
-
-    .qr-card-img {
-        width: 180px;
-        margin: 0 auto;
-    }
-
-    .hero-main-wrapper {
-        position: relative;
-        top: 0;
-        left: 0;
-        width: 100%;
-        margin-bottom: 30px;
-        text-align: center;
-    }
-
-    /* .hero-title font-size handled by clamp */
-    .hero-watermark-text {
-        top: 50%;
-        left: 50%;
-        width: 100%;
-        height: 80%;
-        opacity: 0.5;
-    }
-
-    .laptop-visual-absolute {
-        position: relative;
-        top: 0;
-        right: 0;
-        width: 100%;
-        max-width: 320px;
-        transform: none !important;
-        margin: 20px 0;
-    }
-
-    .btn-hero-wrap {
-        position: relative;
-        bottom: 0;
-        left: 0;
-        margin-top: 30px;
-        align-items: center;
-        width: 100%;
-    }
-
     .btn-build-now {
         width: 100%;
-        max-width: 280px;
+        max-width: 300px;
         font-size: 16px;
         padding: 12px 30px;
-    }
-
-    .social-bar-absolute {
-        position: relative;
-        top: auto;
-        bottom: auto;
-        right: auto;
-        margin-top: 40px;
-        flex-direction: row;
-        gap: 15px;
-        justify-content: center;
-    }
-
-    .writing-mode-vertical-rl {
-        writing-mode: horizontal-tb;
-        transform: none;
-        margin-bottom: 0;
-    }
-
-    .social-bar-absolute .flex-col {
-        flex-direction: row;
     }
 
     .creative-steps {
@@ -2149,104 +2353,68 @@ body.loading {
         text-align: center;
     }
 
-    .creative-steps .max-w-\[1440px\] {
-        padding: 0 20px;
+    .creative-steps-container {
+        padding-left: 20px;
+        padding-right: 20px;
     }
 
-    .creative-steps h2 {
-        text-align: center;
+    .creative-steps h2,
+    .creative-steps .text-left {
+        text-align: center !important;
+        align-items: center !important;
     }
 
-    .creative-steps-grid {
-        grid-template-columns: 1fr 1fr !important;
-        gap: 15px;
+    .creative-steps .grid {
+        grid-template-columns: repeat(2, 1fr) !important;
+        gap: 16px;
     }
 
-    .step-reveal {
-        height: auto !important;
+    .step-card {
         min-height: 220px;
-        padding: 25px !important;
-        align-items: center;
+        padding: 24px !important;
+    }
+
+    .step-description {
+        font-size: 16px !important;
         text-align: center;
     }
 
-    .step-reveal .flex {
-        justify-content: center !important;
-        margin-bottom: 15px;
+    .cta-circle-wrapper {
+        width: 150px;
+        height: 150px;
+        margin: 16px auto 0;
     }
 
-    .step-reveal p {
-        font-size: 18px !important;
+    .cta-circle-wrapper span {
+        font-size: 18px;
     }
 
-    .step-reveal img {
-        width: 25px;
-        height: 25px;
-    }
-
-    .md\:-translate-y-\[200px\] {
-        transform: none !important;
-    }
-
-    .diff-grid {
-        grid-template-columns: 1fr;
-    }
-
-    .service-card {
-        width: 260px !important;
-        height: auto !important;
-        min-height: 350px;
-    }
-
-    .service-img-wrapper {
-        height: 160px;
-    }
-
-    .footer-grid {
-        grid-template-columns: 1fr 1fr;
-        gap: 30px;
-        padding: 0 20px;
+    .different-header-wrapper h2 {
+        text-align: center !important;
     }
 
     .support-banner-section {
-        margin-bottom: 0 !important;
         padding: 60px 0;
-    }
-
-    .support-banner-container {
-        padding: 0 20px;
-    }
-
-    .support-banner-card {
-        flex-direction: column;
-        text-align: center;
-        align-items: center;
-    }
-
-    .support-banner-content {
-        align-items: center;
-    }
-
-    footer {
-        position: relative;
-        padding: 50px 0 20px;
     }
 }
 
 @media (max-width: 768px) {
+    .container-pad {
+        padding-left: 16px;
+        padding-right: 16px;
+    }
 
-    /* .hero-title font-size handled by clamp */
-    .creative-steps-grid {
+    .hero-container-absolute {
+        padding: 0 16px;
+    }
+
+    .creative-steps .grid {
         grid-template-columns: 1fr !important;
     }
 
     .service-card {
-        width: 80vw !important;
-        max-width: 320px;
-    }
-
-    .logo-grid {
-        grid-template-columns: repeat(2, 1fr);
+        width: min(85vw, 300px) !important;
+        min-height: 360px;
     }
 
     .footer-grid {
@@ -2279,93 +2447,115 @@ body.loading {
     }
 
     .support-banner-card {
-        padding: 30px 15px;
-        width: 100%;
+        padding: 32px 16px;
     }
 
-    /* .support-banner-title handled by clamp */
     .btn-create-store {
-        padding: 10px 15px;
+        padding: 10px 16px;
         font-size: 13px;
     }
 
     .header-content {
-        padding: 10px 15px;
+        padding: 10px 16px;
     }
 
-    .design-card {
-        min-w-[200px] !important;
+    .logos-section .flex.flex-col.md\:flex-row {
+        text-align: center;
     }
 
-    .design-icon-wrapper {
-        width: 80px;
-        height: 80px;
+    .stack-card-content span.text-\[120px\] {
+        font-size: 56px !important;
     }
 }
 
 @media (max-width: 992px) {
-
     h1,
     .hero-title {
-        font-size: 28px !important;
+        font-size: clamp(26px, 5vw, 36px) !important;
         line-height: 1.2;
         text-align: center !important;
     }
 
     h2 {
-        font-size: 24px !important;
+        font-size: clamp(22px, 4.5vw, 28px) !important;
         line-height: 1.2;
+    }
+
+    h2.reveal-title .title-stroke,
+    h2.reveal-title .title-solid,
+    h2.click-animate-title {
         text-align: center !important;
-    }
-
-    h3,
-    .service-title {
-        font-size: 20px !important;
-        line-height: 1.2;
-        text-align: center !important;
-    }
-
-    .stack-card-content span.text-\[120px\] {
-        font-size: 60px !important;
-    }
-}
-
-@media (max-width: 480px) {
-
-    h1,
-    .hero-title {
-        font-size: 22px !important;
-        line-height: 1.2;
-        text-align: center !important;
-    }
-
-    h2 {
-        font-size: 22px !important;
-        line-height: 1.2;
     }
 
     h3,
     .service-title {
         font-size: 18px !important;
-        line-height: 1.2;
+        line-height: 1.3;
+    }
+
+    .stack-card-content {
+        text-align: center;
+        align-items: center !important;
+    }
+}
+
+@media (max-width: 480px) {
+    .container-pad {
+        padding-left: 12px;
+        padding-right: 12px;
+    }
+
+    h1,
+    .hero-title {
+        font-size: 22px !important;
+    }
+
+    h2 {
+        font-size: 20px !important;
     }
 
     .hero-container-absolute {
-        padding: 0 15px;
+        padding: 0 12px;
+    }
+
+    .qr-card-img {
+        width: 140px;
+    }
+
+    .laptop-visual-absolute {
+        max-width: 280px;
     }
 
     .btn-build-now {
-        padding: 10px 25px;
+        padding: 10px 24px;
         font-size: 15px;
-        max-width: 250px;
+        max-width: 100%;
     }
 
     .creative-steps {
         padding: 40px 0;
     }
 
-    .step-reveal p {
-        font-size: 16px !important;
+    .step-card {
+        min-height: 200px;
+        padding: 20px !important;
+    }
+
+    .step-description {
+        font-size: 15px !important;
+    }
+
+    .service-card {
+        width: 88vw !important;
+        min-height: 340px;
+    }
+
+    .client-logo-card {
+        width: 82vw;
+    }
+
+    .design-card {
+        width: 82vw !important;
     }
 
     .footer-title {
@@ -2378,5 +2568,16 @@ body.loading {
 
     .contact-item {
         font-size: 13px;
+    }
+
+    .scroll-to-top {
+        bottom: 16px;
+        right: 16px;
+        width: 44px;
+        height: 44px;
+    }
+
+    .mobile-nav {
+        width: min(100%, 320px);
     }
 }

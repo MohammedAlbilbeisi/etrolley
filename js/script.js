@@ -1,4 +1,3 @@
-// --- Scroll to Top Feature ---
 const scrollToTopBtn = document.getElementById('scroll-to-top');
 
 if (scrollToTopBtn) {
@@ -18,23 +17,51 @@ if (scrollToTopBtn) {
     });
 }
 
-// --- GSAP ScrollSmoother Initialization ---
 gsap.registerPlugin(ScrollTrigger, ScrollSmoother);
 
-let smoother = ScrollSmoother.create({
-    wrapper: "#smooth-wrapper",
-    content: "#smooth-content",
-    smooth: 1.5, // Reduced from 2 for better performance
-    effects: true, 
-    smoothTouch: 0.1, 
-});
+// ScrollSmoother: desktop only; native scroll on tablet/mobile
+const DESKTOP_MQ = window.matchMedia("(min-width: 993px)");
+let smoother = null;
 
-// تحديث ScrollTrigger عند تغيير حجم النافذة لضمان دقة الحسابات
+const enableMobileScrollMode = () => {
+    document.body.classList.add("mobile-scroll");
+    if (smoother) {
+        smoother.kill();
+        smoother = null;
+    }
+    gsap.set("#smooth-wrapper", { clearProps: "all" });
+    gsap.set("#smooth-content", { clearProps: "all" });
+};
+
+const enableDesktopScrollMode = () => {
+    document.body.classList.remove("mobile-scroll");
+    if (!smoother) {
+        smoother = ScrollSmoother.create({
+            wrapper: "#smooth-wrapper",
+            content: "#smooth-content",
+            smooth: 1.5,
+            effects: true,
+            smoothTouch: 0.1,
+        });
+    }
+};
+
+const initScrollMode = () => {
+    if (DESKTOP_MQ.matches) {
+        enableDesktopScrollMode();
+    } else {
+        enableMobileScrollMode();
+    }
+    ScrollTrigger.refresh();
+};
+
+initScrollMode();
+DESKTOP_MQ.addEventListener("change", initScrollMode);
+
 window.addEventListener("resize", () => {
     ScrollTrigger.refresh();
 });
 
-// --- AOS Initialization ---
 if (typeof AOS !== 'undefined') {
     AOS.init({ 
         duration: 1200, 
@@ -43,7 +70,6 @@ if (typeof AOS !== 'undefined') {
     });
 }
 
-// --- Page Loader ---
 const initLoader = () => {
     const loader = document.getElementById('loader-wrapper');
     const body = document.body;
@@ -70,19 +96,16 @@ const initLoader = () => {
             .set(loader, { visibility: 'hidden', className: "+=hidden" })
             .call(() => {
                 body.classList.remove('loading');
-                if (typeof smoother !== 'undefined') smoother.paused(false);
+                if (smoother) smoother.paused(false);
                 ScrollTrigger.refresh();
             });
     }
 };
 
-// Start loader exit as soon as possible, but ensure GSAP is loaded
 window.addEventListener('DOMContentLoaded', () => {
-    // We wait a bit to ensure animations are smooth
     setTimeout(initLoader, 1000); 
 });
 
-// Fallback for safety
 window.addEventListener('load', initLoader);
 
 setTimeout(() => {
@@ -93,9 +116,8 @@ setTimeout(() => {
         body.classList.remove('loading');
         loader.classList.add('hidden');
     }
-}, 3000); // Reduced from 4000
+}, 3000);
 
-// --- Stacking Cards ---
 const cards = gsap.utils.toArray('.stack-card');
 
 if (cards.length > 0) {
@@ -108,12 +130,11 @@ if (cards.length > 0) {
                 start: "top 60px",
                 end: () => `+=${cards.length * 250}%`, 
                 pin: true,
-                scrub: 1, // توازن بين السرعة والنعومة
+                scrub: 1,
                 markers: false,
             }
         });
 
-        // تحريك العنوان بنعومة وفخامة
         tl.to(".different-header-wrapper", {
             y: -80,
             opacity: 0,
@@ -123,35 +144,32 @@ if (cards.length > 0) {
         }, 0);
 
         cards.forEach((card, i) => {
-            // حركة ظهور البطاقة: تبدأ شفافة تماماً وتصبح صلبة فوق البطاقة السابقة
             if (i > 0) {
                 tl.fromTo(card, 
                     { 
-                        yPercent: 120, // تبدأ من خارج الرؤية
-                        opacity: 0, // شفافة تماماً عند البداية
-                        scale: 0.9, // أصغر قليلاً
-                        filter: "blur(10px)", // ضبابية خفيفة لمظهر ناعم
+                        yPercent: 120,
+                        opacity: 0,
+                        scale: 0.9,
+                        filter: "blur(10px)",
                     },
                     { 
                         yPercent: 0, 
-                        opacity: 1, // تصبح صلبة تماماً
+                        opacity: 1,
                         scale: 1,
                         filter: "blur(0px)",
                         duration: 2, 
-                        ease: "power3.out" // دخول انسيابي وفخم
+                        ease: "power3.out"
                     }, 
-                    i * 5 // توقيت الدخول
+                    i * 5
                 );
             }
 
-            // حركة كشف النص (الرفع للأعلى 230 بكسل) لتتمكن من القراءة بوضوح
             tl.to(card, {
                 y: -230,
                 duration: 2.5,
                 ease: "none"
-            }, i * 5 + 1.8); // تبدأ بعد أن تستقر البطاقة وتصبح واضحة تماماً
+            }, i * 5 + 1.8);
 
-            // بقاء البطاقة السابقة ثابتة خلفها لتعزيز الاحترافية
             if (i < cards.length - 1) {
                 tl.to(card, {
                     scale: 0.95,
@@ -179,7 +197,6 @@ if (cards.length > 0) {
     }
 }
 
-// --- CTA Circle Effects ---
 const ctaCircle = document.getElementById('cta-circle');
 const ctaText = ctaCircle ? ctaCircle.querySelector('span') : null;
 const ctaFill = ctaCircle ? ctaCircle.querySelector('.cta-fill-layer') : null;
@@ -287,7 +304,6 @@ if (ctaCircle && ctaText && ctaFill) {
     });
 }
 
-// --- Services Hover Effects ---
 const serviceCards = document.querySelectorAll('.service-card');
 const marqueeAnimations = new Map();
 
@@ -382,7 +398,6 @@ serviceCards.forEach((card, index) => {
     });
 });
 
-// --- Services Slider (Drag & Swipe) ---
 const servicesSlider = document.getElementById('services-slider');
 const paginationText = document.getElementById('service-pagination');
 
@@ -394,7 +409,6 @@ if (servicesSlider && paginationText) {
     let rafID;
 
     const onStart = (e) => {
-        // السماح بالنقر على الأزرار داخل البطاقة
         if (e.target.closest('.btn-learn-more')) return;
 
         isDragging = true;
@@ -411,7 +425,7 @@ if (servicesSlider && paginationText) {
         if (!isDragging) return;
         e.preventDefault();
         const x = (e.type === 'mousemove') ? e.pageX : e.touches[0].pageX;
-        const walk = (x - startX) * 2; // سرعة السحب
+        const walk = (x - startX) * 2;
         const prevScrollLeft = servicesSlider.scrollLeft;
         servicesSlider.scrollLeft = scrollLeft - walk;
         velocity = servicesSlider.scrollLeft - prevScrollLeft;
@@ -424,7 +438,6 @@ if (servicesSlider && paginationText) {
         servicesSlider.style.cursor = 'grab';
         servicesSlider.style.removeProperty('user-select');
         
-        // تأثير القصور الذاتي (Momentum Scroll)
         applyMomentum();
         updatePagination();
     };
@@ -432,7 +445,7 @@ if (servicesSlider && paginationText) {
     const applyMomentum = () => {
         if (Math.abs(velocity) > 0.5) {
             servicesSlider.scrollLeft += velocity;
-            velocity *= 0.95; // معامل الاحتكاك
+            velocity *= 0.95;
             rafID = requestAnimationFrame(applyMomentum);
         }
     };
@@ -463,50 +476,54 @@ if (servicesSlider && paginationText) {
     servicesSlider.addEventListener('touchend', onEnd);
 }
 
-// --- Footer Reveal Effect (Fixed Reveal) ---
 const footer = document.querySelector('footer');
 const footerSpacer = document.querySelector('.footer-reveal-spacer');
 
 if (footer && footerSpacer) {
     const updateFooterSpace = () => {
+        if (!DESKTOP_MQ.matches) {
+            footerSpacer.style.height = "0";
+            gsap.set(footer, { clearProps: "all" });
+            ScrollTrigger.refresh();
+            return;
+        }
+
         const footerHeight = footer.offsetHeight;
-        // ضبط طول المساحة الشفافة لتكون بنفس طول الفوتر تماماً
-        footerSpacer.style.height = footerHeight + 'px';
-        
-        // التأكد من أن الفوتر ثابت في الخلفية
-        gsap.set(footer, { 
-            position: 'fixed',
+        footerSpacer.style.height = footerHeight + "px";
+
+        gsap.set(footer, {
+            position: "fixed",
             bottom: 0,
             left: 0,
-            width: '100%',
+            width: "100%",
             zIndex: 5,
-            visibility: 'visible',
-            opacity: 1
+            visibility: "visible",
+            opacity: 1,
         });
-        
+
         ScrollTrigger.refresh();
     };
 
     window.addEventListener('load', () => {
         setTimeout(updateFooterSpace, 300);
     });
-    window.addEventListener('resize', updateFooterSpace);
+    window.addEventListener("resize", updateFooterSpace);
+    DESKTOP_MQ.addEventListener("change", updateFooterSpace);
     updateFooterSpace();
 }
 
-// --- Global Reveal ---
 const revealElements = document.querySelectorAll('.reveal-up, .reveal-scale');
 revealElements.forEach((el) => {
     const isScale = el.classList.contains('reveal-scale');
     gsap.from(el, {
-        y: isScale ? 0 : 60, // Slightly more movement (50 -> 60)
-        scale: isScale ? 0.85 : 1, // More dramatic scale (0.9 -> 0.85)
+        y: isScale ? 0 : 60,
+        scale: isScale ? 0.85 : 1,
         opacity: 0,
-        duration: 1.5, // Reference site uses 1.5s
-        ease: "power2.out", // Reference site uses power2.out
+        duration: 1.5,
+        ease: "power2.out",
         scrollTrigger: {
             trigger: el,
-            start: "top 88%", // Trigger slightly later for better flow
+            start: "top 88%",
             toggleActions: "play none none none"
         }
     });
@@ -515,10 +532,10 @@ revealElements.forEach((el) => {
 const revealTitles = document.querySelectorAll('.reveal-title');
 revealTitles.forEach((title) => {
     gsap.from(title, {
-        y: 40, // (30 -> 40)
+        y: 40,
         opacity: 0,
-        skewY: 2, // Less skew for cleaner look (3 -> 2)
-        duration: 1.8, // More elegant duration (1.5 -> 1.8)
+        skewY: 2,
+        duration: 1.8,
         ease: "power3.out",
         scrollTrigger: {
             trigger: title,
@@ -527,7 +544,6 @@ revealTitles.forEach((title) => {
     });
 });
 
-// --- Background Animations ---
 gsap.to(".laptop-visual-absolute img, .cta-glow-layer", {
     y: 15,
     duration: 3,
@@ -545,7 +561,6 @@ gsap.to(".graphic-cart-service, .graphic-cart", {
     ease: "sine.inOut"
 });
 
-// --- Clients Slider ---
 const logosSlider = document.getElementById('logos-slider');
 const prevLogos = document.getElementById('prev-logos');
 const nextLogos = document.getElementById('next-logos');
@@ -637,7 +652,6 @@ if (logosSlider && prevLogos && nextLogos) {
     logosSlider.addEventListener('touchmove', moveDrag, { passive: true });
 }
 
-// --- Designs Slider ---
 const designsSlider = document.getElementById('designs-slider');
 const prevDesigns = document.getElementById('prev-designs');
 const nextDesigns = document.getElementById('next-designs');
@@ -729,7 +743,6 @@ if (designsSlider && prevDesigns && nextDesigns) {
     designsSlider.addEventListener('touchmove', moveDragDesigns, { passive: true });
 }
 
-// --- Partners Scroll ---
 const partnersTrack = document.querySelector('.slider-track');
 if (partnersTrack) {
     const items = Array.from(partnersTrack.children);
@@ -739,7 +752,6 @@ if (partnersTrack) {
     });
 }
 
-// --- Moving Badge ---
 const movingBadge = document.getElementById('moving-badge');
 if (movingBadge) {
     gsap.to(movingBadge, {
@@ -753,7 +765,6 @@ if (movingBadge) {
     });
 }
 
-// --- Mobile Menu ---
 const mobileMenuBtn = document.getElementById('mobile-menu-btn');
 const closeMenuBtn = document.getElementById('close-menu');
 const mobileNav = document.getElementById('mobile-nav');
@@ -789,7 +800,6 @@ if (mobileMenuBtn && closeMenuBtn && mobileNav) {
     });
 }
 
-// --- Navigation Toggle ---
 const navItems = document.querySelectorAll('.nav-item');
 navItems.forEach(item => {
     item.addEventListener('click', function (e) {
@@ -798,7 +808,6 @@ navItems.forEach(item => {
     });
 });
 
-// --- Creative Steps ---
 const stepCards = document.querySelectorAll('.step-reveal');
 if (stepCards.length > 0) {
     gsap.from(stepCards, {
@@ -816,121 +825,136 @@ if (stepCards.length > 0) {
     });
 }
 
-// --- Magnetic CTA Circle Effect (psstudios style) ---
-const ctaWrapper = document.querySelector('.cta-circle-wrapper');
+const ctaWrapper = document.querySelector(".cta-circle-wrapper");
 if (ctaWrapper) {
-    const ctaFill = ctaWrapper.querySelector('.cta-fill');
-    const ctaText = ctaWrapper.querySelector('span');
-    const proximityThreshold = 250; 
-    const magneticStrength = 0.5; 
+    const ctaFill = ctaWrapper.querySelector(".cta-fill");
+    const ctaText = ctaWrapper.querySelector("span");
+    const proximityThreshold = 250;
+    const magneticStrength = 0.5;
+    let isActive = false;
 
-    ctaWrapper.addEventListener('mouseenter', (e) => {
-        const rect = ctaWrapper.getBoundingClientRect();
-        const relX = e.clientX - rect.left;
-        const relY = e.clientY - rect.top;
-        
-        // ضبط المركز وتكبير الدائرة فوراً لتغطية كل المساحة
+    const getPointerCoords = (e, rect) => {
+        const clientX = e.clientX ?? e.changedTouches?.[0]?.clientX ?? rect.left + rect.width / 2;
+        const clientY = e.clientY ?? e.changedTouches?.[0]?.clientY ?? rect.top + rect.height / 2;
+        return {
+            relX: clientX - rect.left,
+            relY: clientY - rect.top,
+            clientX,
+            clientY,
+        };
+    };
+
+    const fillCircle = (relX, relY) => {
         gsap.set(ctaFill, {
             x: relX,
             y: relY,
             xPercent: -50,
             yPercent: -50,
-            scale: 0
+            scale: 0,
         });
-        
         gsap.to(ctaFill, {
-            scale: 2.5, // تكبير كافٍ لتغطية الدائرة مهما كان مكان الدخول
+            scale: 2.5,
             duration: 0.5,
             ease: "power2.out",
-            overwrite: true
+            overwrite: true,
         });
-        
-        gsap.to(ctaText, {
-            color: "#FFFFFF",
-            duration: 0.2
-        });
-    });
+        gsap.to(ctaText, { color: "#FFFFFF", duration: 0.2 });
+    };
 
-    window.addEventListener('mousemove', (e) => {
-        const rect = ctaWrapper.getBoundingClientRect();
-        const centerX = rect.left + rect.width / 2;
-        const centerY = rect.top + rect.height / 2;
-
-        const distanceX = e.clientX - centerX;
-        const distanceY = e.clientY - centerY;
-        const distance = Math.sqrt(distanceX * distanceX + distanceY * distanceY);
-
-        if (distance < proximityThreshold) {
-            const moveX = distanceX * magneticStrength;
-            const moveY = distanceY * magneticStrength;
-
-            gsap.to(ctaWrapper, {
-                x: moveX,
-                y: moveY,
-                duration: 0.4,
-                ease: "power2.out"
-            });
-
-            // جعل التعبئة تتبع الفأرة بدقة داخل الدائرة
-            const relX = e.clientX - rect.left;
-            const relY = e.clientY - rect.top;
-            gsap.to(ctaFill, {
-                x: relX,
-                y: relY,
-                duration: 0.3,
-                ease: "power1.out"
-            });
-
-            gsap.to(ctaText, {
-                x: moveX * 0.3,
-                y: moveY * 0.3,
-                duration: 0.4,
-                ease: "power2.out"
-            });
-        } else {
-            gsap.to(ctaWrapper, {
-                x: 0,
-                y: 0,
-                duration: 0.8,
-                ease: "elastic.out(1, 0.3)"
-            });
-
-            gsap.to(ctaText, {
-                x: 0,
-                y: 0,
-                duration: 0.8,
-                ease: "elastic.out(1, 0.3)"
-            });
-        }
-    });
-
-    ctaWrapper.addEventListener('mouseleave', (e) => {
-        const rect = ctaWrapper.getBoundingClientRect();
-        const relX = e.clientX - rect.left;
-        const relY = e.clientY - rect.top;
-        
-        // سحب اللون وتصغيره عند نقطة الخروج
+    const emptyCircle = (relX, relY) => {
         gsap.to(ctaFill, {
             x: relX,
             y: relY,
             scale: 0,
             duration: 0.4,
             ease: "power2.in",
-            overwrite: true
+            overwrite: true,
+        });
+        gsap.to(ctaWrapper, { x: 0, y: 0, duration: 0.5, ease: "power2.out" });
+        gsap.to(ctaText, { color: "#316C6B", x: 0, y: 0, duration: 0.3 });
+    };
+
+    const activateFill = (e) => {
+        isActive = true;
+        const rect = ctaWrapper.getBoundingClientRect();
+        const { relX, relY } = getPointerCoords(e, rect);
+        fillCircle(relX, relY);
+    };
+
+    const moveFill = (e) => {
+        if (!isActive) return;
+        const rect = ctaWrapper.getBoundingClientRect();
+        const { relX, relY, clientX, clientY } = getPointerCoords(e, rect);
+
+        gsap.to(ctaFill, {
+            x: relX,
+            y: relY,
+            duration: 0.3,
+            ease: "power1.out",
         });
 
-        gsap.to(ctaText, {
-            color: "#316C6B",
-            duration: 0.3
-        });
+        if (DESKTOP_MQ.matches && e.pointerType === "mouse") {
+            const centerX = rect.left + rect.width / 2;
+            const centerY = rect.top + rect.height / 2;
+            const distanceX = clientX - centerX;
+            const distanceY = clientY - centerY;
+            const distance = Math.hypot(distanceX, distanceY);
+
+            if (distance < proximityThreshold) {
+                const moveX = distanceX * magneticStrength;
+                const moveY = distanceY * magneticStrength;
+                gsap.to(ctaWrapper, { x: moveX, y: moveY, duration: 0.4, ease: "power2.out" });
+                gsap.to(ctaText, { x: moveX * 0.3, y: moveY * 0.3, duration: 0.4, ease: "power2.out" });
+            }
+        }
+    };
+
+    const deactivateFill = (e) => {
+        if (!isActive) return;
+        isActive = false;
+        const rect = ctaWrapper.getBoundingClientRect();
+        const { relX, relY } = getPointerCoords(e, rect);
+        emptyCircle(relX, relY);
+    };
+
+    ctaWrapper.addEventListener("pointerenter", (e) => {
+        if (e.pointerType === "mouse") activateFill(e);
     });
+    ctaWrapper.addEventListener("pointermove", moveFill);
+    ctaWrapper.addEventListener("pointerleave", deactivateFill);
+    ctaWrapper.addEventListener("pointercancel", deactivateFill);
+    ctaWrapper.addEventListener("pointerdown", (e) => {
+        if (e.pointerType !== "mouse") activateFill(e);
+    });
+    ctaWrapper.addEventListener("pointerup", (e) => {
+        if (e.pointerType !== "mouse") deactivateFill(e);
+    });
+
+    if (DESKTOP_MQ.matches) {
+        window.addEventListener("mousemove", (e) => {
+            if (isActive) return;
+            const rect = ctaWrapper.getBoundingClientRect();
+            const centerX = rect.left + rect.width / 2;
+            const centerY = rect.top + rect.height / 2;
+            const distanceX = e.clientX - centerX;
+            const distanceY = e.clientY - centerY;
+            const distance = Math.hypot(distanceX, distanceY);
+
+            if (distance < proximityThreshold) {
+                const moveX = distanceX * magneticStrength;
+                const moveY = distanceY * magneticStrength;
+                gsap.to(ctaWrapper, { x: moveX, y: moveY, duration: 0.4, ease: "power2.out" });
+            } else {
+                gsap.to(ctaWrapper, { x: 0, y: 0, duration: 0.8, ease: "elastic.out(1, 0.3)" });
+                gsap.to(ctaText, { x: 0, y: 0, duration: 0.8, ease: "elastic.out(1, 0.3)" });
+            }
+        });
+    }
 }
 
-// --- Title Click Animation ---
 const animateTitles = document.querySelectorAll('.click-animate-title');
 
 animateTitles.forEach(title => {
-    // Split each span's text into letters
     const spans = title.querySelectorAll('span');
     spans.forEach(span => {
         const text = span.textContent;
@@ -940,15 +964,12 @@ animateTitles.forEach(title => {
             letter.style.display = 'inline-block';
             letter.textContent = char === ' ' ? '\u00A0' : char;
             
-            // إضافة حدث النقر لكل حرف على حدة
             letter.addEventListener('click', (e) => {
                 e.stopPropagation();
                 
-                // مصفوفة ألوان الهوية البصرية (ذهبي، تيل)
                 const brandColors = ["#F5C99A", "#316C6B"];
                 const randomColor = brandColors[Math.floor(Math.random() * brandColors.length)];
                 
-                // تأثير نبض الحرف وتغيير لونه
                 gsap.to(letter, {
                     color: randomColor,
                     scale: 1.4,
@@ -959,12 +980,12 @@ animateTitles.forEach(title => {
                     ease: "back.out(2)",
                     onStart: () => {
                         letter.classList.add('active-char');
-                        letter.style.textShadow = 'none'; // إزالة الظل مؤقتاً لبروز اللون
+                        letter.style.textShadow = 'none';
                     },
                     onComplete: () => {
                         letter.classList.remove('active-char');
                         if (letter.closest('.title-stroke')) {
-                            letter.style.textShadow = ''; // إعادة الظل للنص المفرغ
+                            letter.style.textShadow = '';
                         }
                     }
                 });
@@ -977,10 +998,8 @@ animateTitles.forEach(title => {
     title.addEventListener('click', () => {
         const letters = title.querySelectorAll('span span');
         
-        // Reset any ongoing animations
         gsap.killTweensOf(letters);
         
-        // Premium stagger animation
         gsap.fromTo(letters, 
             { 
                 y: 0,
@@ -1014,7 +1033,6 @@ animateTitles.forEach(title => {
         );
     });
 
-    // إضافة أنيميشن عند الـ Hover ليعطي انطباعاً تفاعلياً فورياً
     title.addEventListener('mouseenter', () => {
         const letters = title.querySelectorAll('span span');
         gsap.killTweensOf(letters);
