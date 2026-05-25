@@ -1,12 +1,32 @@
 const scrollToTopBtn = document.getElementById('scroll-to-top');
+const header = document.querySelector('header');
+let lastScrollY = window.scrollY;
 
 if (scrollToTopBtn) {
     window.addEventListener('scroll', () => {
-        if (window.scrollY > 300) {
+        const currentScrollY = window.scrollY;
+        
+        if (currentScrollY > 300) {
             scrollToTopBtn.classList.add('show');
         } else {
             scrollToTopBtn.classList.remove('show');
         }
+
+        if (header) {
+            if (currentScrollY > 50) {
+                header.classList.add('header-scrolled');
+            } else {
+                header.classList.remove('header-scrolled');
+            }
+
+            if (currentScrollY > lastScrollY && currentScrollY > 100) {
+                header.classList.add('header-hidden');
+            } else {
+                header.classList.remove('header-hidden');
+            }
+        }
+
+        lastScrollY = currentScrollY;
     });
 
     scrollToTopBtn.addEventListener('click', () => {
@@ -19,8 +39,7 @@ if (scrollToTopBtn) {
 
 gsap.registerPlugin(ScrollTrigger, ScrollSmoother);
 
-// ScrollSmoother: desktop only; native scroll on tablet/mobile
-const DESKTOP_MQ = window.matchMedia("(min-width: 993px)");
+const DESKTOP_MQ = window.matchMedia("(min-width: 800px)");
 let smoother = null;
 
 const enableMobileScrollMode = () => {
@@ -118,84 +137,141 @@ setTimeout(() => {
     }
 }, 3000);
 
-const cards = gsap.utils.toArray('.stack-card');
-
-if (cards.length > 0) {
-    const isDesktop = window.matchMedia("(min-width: 993px)").matches;
-
-    if (isDesktop) {
-        const tl = gsap.timeline({
+    // Detailed Reference Animation for Titles
+    gsap.fromTo(".experience-title-stroke", 
+        { x: 50, opacity: 0 },
+        { 
+            x: 0, 
+            opacity: 1, 
+            duration: 1.5, 
+            delay: 0.15,
+            ease: "power2.out",
             scrollTrigger: {
-                trigger: "#different-section",
-                start: "top 60px",
-                end: () => `+=${cards.length * 250}%`, 
-                pin: true,
-                scrub: 1,
-                markers: false,
+                trigger: ".experience-header",
+                start: "top 90%",
+                toggleActions: "play none none none"
             }
-        });
+        }
+    );
 
-        tl.to(".different-header-wrapper", {
-            y: -80,
-            opacity: 0,
-            filter: "blur(15px)",
-            duration: 1.5,
-            ease: "power2.inOut"
-        }, 0);
-
-        cards.forEach((card, i) => {
-            if (i > 0) {
-                tl.fromTo(card, 
-                    { 
-                        yPercent: 120,
-                        opacity: 0,
-                        scale: 0.9,
-                        filter: "blur(10px)",
-                    },
-                    { 
-                        yPercent: 0, 
-                        opacity: 1,
-                        scale: 1,
-                        filter: "blur(0px)",
-                        duration: 2, 
-                        ease: "power3.out"
-                    }, 
-                    i * 5
-                );
+    gsap.fromTo(".experience-title-fill", 
+        { x: 50, opacity: 0 },
+        { 
+            x: 0, 
+            opacity: 1, 
+            duration: 1.5, 
+            delay: 0.3,
+            ease: "power2.out",
+            scrollTrigger: {
+                trigger: ".experience-header",
+                start: "top 90%",
+                toggleActions: "play none none none"
             }
+        }
+    );
 
-            tl.to(card, {
-                y: -230,
-                duration: 2.5,
-                ease: "none"
-            }, i * 5 + 1.8);
+    const cards = gsap.utils.toArray('.experience-card');
+    const revealOffset = -140; 
+    
+    if (cards.length > 0) {
+        let mm = gsap.matchMedia();
 
-            if (i < cards.length - 1) {
-                tl.to(card, {
-                    scale: 0.95,
-                    opacity: 0.7,
-                    filter: "blur(4px)",
-                    duration: 2,
-                    ease: "power2.inOut"
-                }, (i + 1) * 5 - 0.5);
-            }
-        });
-    } else {
-        cards.forEach((card, i) => {
-            gsap.from(card, {
+        mm.add("(min-width: 1025px)", () => {
+            const tl = gsap.timeline({
                 scrollTrigger: {
-                    trigger: card,
-                    start: "top 85%",
-                    toggleActions: "play none none none"
-                },
-                y: 50,
-                opacity: 0,
-                duration: 0.8,
-                ease: "power2.out"
+                    trigger: ".experience-section",
+                    start: "top top", 
+                    end: () => `+=${cards.length * 15}%`, 
+                    pin: true,
+                    pinSpacing: true, 
+                    scrub: 0.02,
+                    invalidateOnRefresh: true,
+                }
+            });
+
+            tl.to(".experience-header, .experience-cards-wrapper", {
+                yPercent: (i, target) => target.classList.contains('experience-header') ? -100 : -35,
+                opacity: (i, target) => target.classList.contains('experience-header') ? 0 : 1,
+                duration: 0.15,
+                ease: "none"
+            }, 0);
+
+            cards.forEach((card, i) => {
+                const slot = 0.3;
+                const duration = 0.3;
+
+                if (i === 0) {
+                    gsap.set(card, { y: revealOffset, yPercent: 0, zIndex: 10 });
+                } else {
+                    gsap.set(card, { yPercent: 100, y: 0, zIndex: 10 + i });
+                }
+
+                const nextCard = cards[i + 1];
+                if (nextCard) {
+                    tl.fromTo(nextCard, 
+                        { yPercent: 100, y: 0 }, 
+                        { 
+                            yPercent: 0, 
+                            y: revealOffset,
+                            duration: duration, 
+                            ease: "power1.inOut"
+                        }, 
+                        i * slot
+                    );
+                }
             });
         });
+
+        mm.add("(max-width: 1024px)", () => {
+             cards.forEach((card) => {
+                 gsap.set(card, { clearProps: "all" });
+                 gsap.set(card, { opacity: 1, visibility: "visible", y: 0, yPercent: 0, height: "auto" });
+                 
+                 const syncHeight = () => {
+                     const img = card.querySelector('.experience-card-image');
+                     const content = card.querySelector('.experience-card-content');
+                     if (img && content) {
+                         const imgElement = img.querySelector('img');
+                         const update = () => {
+                             const targetHeight = img.offsetHeight;
+                             if (targetHeight > 0) {
+                                 content.style.setProperty('height', targetHeight + 'px', 'important');
+                             }
+                         };
+
+                         if (imgElement.complete) {
+                            update();
+                         } else {
+                            imgElement.onload = update;
+                         }
+                         setTimeout(update, 100);
+                         setTimeout(update, 500);
+                         setTimeout(update, 1000);
+                     }
+                 };
+                 syncHeight();
+                 window.addEventListener('resize', syncHeight);
+                 window.addEventListener('load', syncHeight);
+
+                 gsap.fromTo(card, 
+                     { y: 30, opacity: 0 },
+                     {
+                         y: 0,
+                         opacity: 1,
+                         duration: 0.6,
+                         scrollTrigger: {
+                             trigger: card,
+                             start: "top 90%",
+                             toggleActions: "play none none none",
+                             onEnter: syncHeight 
+                         }
+                     }
+                 );
+             });
+             
+             ScrollTrigger.refresh();
+         });
     }
-}
 
 const ctaCircle = document.getElementById('cta-circle');
 const ctaText = ctaCircle ? ctaCircle.querySelector('span') : null;
@@ -314,8 +390,27 @@ serviceCards.forEach((card, index) => {
     const marqueeText = btn.querySelector('.btn-marquee-text');
 
     card.addEventListener('mouseenter', () => {
+        const imgWrapper = card.querySelector('.service-img-wrapper');
+        const radius = window.innerWidth <= 767 ? "6.3333333333vw" : "40px";
+
+        gsap.to(card, {
+            borderRadius: radius,
+            duration: 0.4,
+            ease: "power2.out"
+        });
+
+        if (imgWrapper) {
+            gsap.to(imgWrapper, {
+                borderTopLeftRadius: radius,
+                borderTopRightRadius: radius,
+                duration: 0.4,
+                ease: "power2.out"
+            });
+        }
+
         gsap.to(btn, {
-            color: "#F5C99A",
+            backgroundColor: "#F5C99A",
+            color: "#316C6B",
             duration: 0.4
         });
 
@@ -323,7 +418,9 @@ serviceCards.forEach((card, index) => {
             y: -20,
             opacity: 0,
             duration: 0.3,
-            onComplete: () => originalText.style.display = 'none'
+            onComplete: () => {
+                originalText.style.display = 'none';
+            }
         });
 
         marqueeWrapper.style.display = 'block';
@@ -337,11 +434,14 @@ serviceCards.forEach((card, index) => {
             delay: 0.1
         });
 
+        const btnWidth = btn.offsetWidth;
+        const textWidth = marqueeText.offsetWidth;
+
         const marqueeAnim = gsap.fromTo(marqueeText,
-            { x: btn.offsetWidth },
+            { x: btnWidth },
             {
-                x: -marqueeText.offsetWidth,
-                duration: 3,
+                x: -textWidth,
+                duration: 5, 
                 ease: "none",
                 repeat: -1
             }
@@ -349,23 +449,25 @@ serviceCards.forEach((card, index) => {
         marqueeAnimations.set(card, marqueeAnim);
     });
 
-    btn.addEventListener('mouseenter', () => {
-        gsap.to(btn, {
-            backgroundColor: "#F5C99A",
-            color: "#316C6B",
-            duration: 0.3
-        });
-    });
-
-    btn.addEventListener('mouseleave', () => {
-        gsap.to(btn, {
-            backgroundColor: "#316C6B",
-            color: "#F5C99A",
-            duration: 0.3
-        });
-    });
-
     card.addEventListener('mouseleave', () => {
+        const imgWrapper = card.querySelector('.service-img-wrapper');
+        const defaultRadius = window.innerWidth <= 767 ? "15px" : "20px";
+
+        gsap.to(card, {
+            borderRadius: defaultRadius,
+            duration: 0.4,
+            ease: "power2.out"
+        });
+
+        if (imgWrapper) {
+            gsap.to(imgWrapper, {
+                borderTopLeftRadius: defaultRadius,
+                borderTopRightRadius: defaultRadius,
+                duration: 0.4,
+                ease: "power2.out"
+            });
+        }
+
         const marqueeAnim = marqueeAnimations.get(card);
         if (marqueeAnim) marqueeAnim.kill();
 
@@ -387,7 +489,7 @@ serviceCards.forEach((card, index) => {
 
         originalText.style.display = 'block';
         gsap.fromTo(originalText, {
-            y: -20,
+            y: 20,
             opacity: 0
         }, {
             y: 0,
@@ -451,19 +553,28 @@ if (servicesSlider && paginationText) {
     };
 
     const updatePagination = () => {
-        const cardWidth = servicesSlider.querySelector('.service-card').offsetWidth + 40;
+        const cardElement = servicesSlider.querySelector('.service-card');
+        if (!cardElement) return;
+        
+        const cardWidth = cardElement.offsetWidth + 40; 
         const currentIndex = Math.round(servicesSlider.scrollLeft / cardWidth);
         const totalCards = servicesSlider.querySelectorAll('.service-card').length;
         
-        gsap.to(paginationText, {
-            y: -10,
-            opacity: 0,
-            duration: 0.3,
-            onComplete: () => {
-                paginationText.innerText = `${currentIndex + 1}/${totalCards}`;
-                gsap.to(paginationText, { y: 0, opacity: 1, duration: 0.3 });
-            }
-        });
+        const updateText = (el) => {
+            if (!el) return;
+            gsap.to(el, {
+                y: -10,
+                opacity: 0,
+                duration: 0.3,
+                onComplete: () => {
+                    el.innerText = `${currentIndex + 1}/${totalCards}`;
+                    gsap.to(el, { y: 0, opacity: 1, duration: 0.3 });
+                }
+            });
+        };
+
+        updateText(document.getElementById('service-pagination'));
+        updateText(document.getElementById('service-pagination-mobile'));
     };
 
     servicesSlider.addEventListener('mousedown', onStart);
